@@ -49,6 +49,8 @@ client.on('message', message => {
 
     try {
         command.execute(message, args);
+        if (commandName == 'play')
+            message.delete();
     } catch (error) {
         console.error(error);
         message.reply(`We don't got the yummy for that command.`);
