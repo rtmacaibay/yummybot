@@ -1,4 +1,4 @@
-const { prefix } = require('../config.json');
+const { config } = require('../config.js');
 
 module.exports = {
 	name: 'help',
@@ -8,6 +8,7 @@ module.exports = {
 	execute(message, args) {
         const data = [];
         const { commands } = message.client;
+        const prefix = config.prefix;
 
         if (!args.length) {
             data.push('Here\'s a list of all my commands:');
