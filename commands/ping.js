@@ -4,5 +4,5 @@ module.exports = {
     args: false,
     execute(message, args) {
         message.channel.send('Pong.');
-    },
+    }
 };

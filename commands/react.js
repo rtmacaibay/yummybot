@@ -9,5 +9,5 @@ module.exports = {
         let lastTwo = await message.channel.messages.fetch({limit: 2});
         lastTwo.last().react(emoji);
         lastTwo.first().delete();
-    },
+    }
 };

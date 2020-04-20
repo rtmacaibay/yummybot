@@ -18,5 +18,5 @@ module.exports = {
         } else {
             message.channel.send(`You didn't specific a positive numeric argument, ${message.author}!`);
         }
-    },
+    }
 };

@@ -1,8 +1,9 @@
 const fs = require('fs');
 const Discord = require('discord.js');
+const Client = require('./client/client.js');
 const { config } = require('./config.js');
 
-const client = new Discord.Client();
+const client = new Client();
 client.commands = new Discord.Collection();
 
 const prefix = config.prefix;
@@ -20,10 +21,10 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-    if (message.content.toLowerCase().includes('fuck') || message.content.toLowerCase().includes('shit')) {
+    if ((message.content.toLowerCase().includes('fuck') || message.content.toLowerCase().includes('shit')) && !message.author.bot)
         message.channel.send(`${message.author}, hey relax. You just need some yummy. Do you got that yummy?`);
-    }
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) 
+        return;
     
     console.log(message.content);
 
@@ -33,7 +34,8 @@ client.on('message', message => {
     const command = client.commands.get(commandName)
         || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-    if (!command) return;
+    if (!command) 
+        return;
 
     if (command.args && !args.length) {
         let reply = `You didn't provide any arguments, ${message.author}!`;
@@ -49,7 +51,7 @@ client.on('message', message => {
         command.execute(message, args);
     } catch (error) {
         console.error(error);
-        message.reply(`${message.author}, we don't got the yummy for that command.`);
+        message.reply(`We don't got the yummy for that command.`);
     }
 });
 

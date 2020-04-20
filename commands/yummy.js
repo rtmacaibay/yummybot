@@ -15,5 +15,5 @@ module.exports = {
             }
         }
         message.channel.send(output);
-    },
+    }
 };
