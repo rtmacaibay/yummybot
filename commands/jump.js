@@ -13,10 +13,7 @@ module.exports = {
         if (args[0] < 2 || args[0] > serverQueue.songs.length)
             return message.channel.send(`I can't jump to a song at position ${args[0]}!`);
         
-        for (var i in serverQueue.songs)
-            if (i != args[0]-2)
-                return serverQueue.connection.dispatcher.end();
-            else 
-                serverQueue.songs.shift();  
+        serverQueue.splice(0, args[0]-1);
+        serverQueue.connection.dispatcher.end();
     }
 };

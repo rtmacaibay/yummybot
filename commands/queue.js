@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
     name: 'queue',
     description: 'Gets the current queue', 
@@ -5,11 +7,13 @@ module.exports = {
     execute(message, args) {
         const serverQueue = message.client.queue.get(message.guild.id);
         let output = 'Now Playing: ';
-        for (var i in serverQueue.songs) {
-            var pos = i+1;
-            output += `**${pos}: ${serverQueue.songs[i].title}**\n`;
+        var embed = new MessageEmbed()
+            .setColor('#ffd1dc')
+            .setTitle('Music Queue');
+        for (let i = 0; i < serverQueue.length; i++) {
+            embed.addField(`${i+1}:`, `${serverQueue[i]}`);
         }
 
-        return message.channel.send(output);
+        return message.channel.send(embed);
     }
 };
