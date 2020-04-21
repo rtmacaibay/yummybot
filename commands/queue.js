@@ -11,7 +11,7 @@ module.exports = {
             .setColor('#ffd1dc')
             .setTitle('Music Queue');
         for (let i = 0; i < serverQueue.songs.length; i++) {
-            embed.addField(`${i+1}:`, `${serverQueue.songs[i]}`);
+            embed.addField(`${i+1}: ${serverQueue.songs[i].title}`);
         }
 
         return message.channel.send(embed);
