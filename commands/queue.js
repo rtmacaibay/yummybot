@@ -5,8 +5,8 @@ module.exports = {
     execute(message, args) {
         const serverQueue = message.client.queue.get(message.guild.id);
         let output = 'Now Playing: ';
-        for (var song in serverQueue.songs) {
-            output += `**${song}**\n`;
+        for (var i in serverQueue.songs) {
+            output += `**${i+1}: ${serverQueue.songs[i].title}**\n`;
         }
 
         return message.channel.send(output);

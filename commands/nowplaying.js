@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'nowplaying',
     description: 'Get the song that is playing',
-    alias: ['np'],
+    aliases: ['np'],
     args: false,
 	execute(message, args) {
 		const serverQueue = message.client.queue.get(message.guild.id);

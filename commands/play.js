@@ -3,6 +3,7 @@ const ytdl = require('ytdl-core');
 module.exports = {
     name: 'play',
     description: 'Plays a song in the channel.', 
+    aliases: ['p'],
     args: true,
     usage: '<song url>',
     async execute(message, args) {
