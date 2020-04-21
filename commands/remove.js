@@ -17,7 +17,7 @@ module.exports = {
         var song_index = 0;
         var song_removed;
         for (var i in serverQueue.songs)
-            const new_song = {
+            var new_song = {
                 title: serverQueue.songs[i].title,
                 url: serverQueue.songs[i].url
             };
