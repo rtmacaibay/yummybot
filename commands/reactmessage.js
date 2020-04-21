@@ -22,7 +22,8 @@ module.exports = {
                 }
                 const letter = c + '_' + map.get(c);
                 const emoji = message.guild.emojis.cache.find(emoji => emoji.name === letter);
-                lastTwo.last().react(emoji);
+                if (emoji)
+                    lastTwo.last().react(emoji);
             }
         }
         lastTwo.first().delete();

@@ -55,7 +55,7 @@ module.exports = {
             }
         } catch (error) {
             console.log(error);
-            message.channel.send(error.message);
+            message.channel.send('Invalid link');
         }
     },
 
