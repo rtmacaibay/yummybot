@@ -13,7 +13,7 @@ module.exports = {
         if (args[0] < 2 || args[0] > serverQueue.songs.length)
             return message.channel.send(`I can't remove a song at position ${args[0]}!`);
         
-        serverQueue.splice(args[0]-1, 1);
+        serverQueue.songs.splice(args[0]-1, 1);
         return message.channel.send(`Removed song at position ${args[0]}`);
     }
 };
