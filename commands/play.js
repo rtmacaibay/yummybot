@@ -13,7 +13,7 @@ module.exports = {
     async execute(message, args) {
         try {
             const queue = message.client.queue;
-            const serverQueue = queue.get(message.guild.id);
+            var serverQueue = queue.get(message.guild.id);
 
             const voiceChannel = message.member.voice.channel;
             if (!voiceChannel) {
