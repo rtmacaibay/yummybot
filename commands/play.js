@@ -67,7 +67,7 @@ module.exports = {
         }
     },
 
-    initQueue(message, song, voiceChannel) {
+    async initQueue(message, song, voiceChannel) {
         const queueConstruct = {
             textChannel: message.channel,
             voiceChannel: voiceChannel,
