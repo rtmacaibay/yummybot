@@ -42,7 +42,7 @@ module.exports = {
                     }
 
                     if (!serverQueue) {
-                        this.initQueue(message, song, voiceChannel);
+                        this.initQueue(message, song, voiceChannel, queue);
                     } else {
                         serverQueue.songs.push(song);
                     }
@@ -55,7 +55,7 @@ module.exports = {
                 };
 
                 if (!serverQueue) {
-                    this.initQueue(message,song, voiceChannel);
+                    this.initQueue(message,song, voiceChannel, queue);
                 } else {
                     serverQueue.songs.push(song);
                     return message.channel.send(`${song.title} has been added to the queue!`); 
@@ -67,7 +67,7 @@ module.exports = {
         }
     },
 
-    async initQueue(message, song, voiceChannel) {
+    async initQueue(message, song, voiceChannel, queue) {
         const queueConstruct = {
             textChannel: message.channel,
             voiceChannel: voiceChannel,

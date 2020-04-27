@@ -18,7 +18,7 @@ module.exports = {
                     mention = mention.slice(1);
                 }
             }
-            const user = client.users.cache.get(mention);
+            const user = message.client.users.cache.get(mention);
 
             output = (`${user}, `).concat(output);
         }
