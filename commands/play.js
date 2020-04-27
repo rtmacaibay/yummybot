@@ -38,10 +38,14 @@ module.exports = {
                                                 });
                 for (let i = 0; i < videos.length; i++) {
                     const songInfo = await videos[i].fetch();
+                    var songLength = `${songInfo.duration.minutes}:${songInfo.duration.seconds}`;
+                    if (songInfo.duration.hour > 0) {
+                        songLength = (`${songInfo.duration.hour}:`).concat(songLength);
+                    }
                     const song = {
                         title: songInfo.title,
                         url: songInfo.url,
-                        duration: songInfo.duration,
+                        duration: songLength,
                         author: message.author
                     }
 
@@ -55,10 +59,14 @@ module.exports = {
                 embed.addField(`Queued`,`[${playlist.title}](${playlist.url}) (${playlist.length} videos)`);
             } else {
                 const songInfo = await youtube.getVideo(args[0]);
+                var songLength = `${songInfo.duration.minutes}:${songInfo.duration.seconds}`;
+                if (songInfo.duration.hour > 0) {
+                    songLength = (`${songInfo.duration.hour}:`).concat(songLength);
+                }
                 const song = {
                     title: songInfo.title,
                     url: songInfo.url,
-                    duration: songInfo.duration,
+                    duration: songLength,
                     author: message.author
                 };
 
@@ -66,7 +74,7 @@ module.exports = {
                     this.initQueue(message,song, voiceChannel, queue);
                 } else {
                     serverQueue.songs.push(song);
-                    embed.addField(`Queued`,`${song.title} has been added to the queue! (${song.duration.minutes}:${song.duration.seconds})`);
+                    embed.addField(`Queued`,`${song.title} has been added to the queue! (${song.duration})`);
                     return message.channel.send(embed); 
                 }
             }
@@ -122,7 +130,7 @@ module.exports = {
             })
             .on('error', error => console.error(error));
         dispatcher.setVolumeLogarithmic(serverQueue.volume / 10);
-        embed.addField(`Started playing`, `**${song.title}** (${song.duration.minutes}:${song.duration.seconds})`);
+        embed.addField(`Started playing`, `**${song.title}** (${song.duration})`);
         serverQueue.textChannel.send(embed);
     }
 };
