@@ -24,7 +24,7 @@ module.exports = {
             let counter = 0;
             for (let i = start; i < serverQueue.songs.length; i++) {
                 var song = serverQueue.songs[i];
-                embed.addField(`${i+1}) Requested by ${song.author.username}`,`${song.title} (${song.duration})`);
+                embed.addField(`${i+1}) Requested by ${song.author.username}`,`[${song.title}](${song.url}) (${song.duration})`);
                 if (counter++ == 9) {
                     break;
                 }
@@ -38,7 +38,7 @@ module.exports = {
                                 return ['⬅️', '➡️'].includes(reaction.emoji.name) && !msg.author.bot;
                             };
 
-                            const collector = msg.createReactionCollector(filter, { time: 15000 });
+                            const collector = msg.createReactionCollector(filter);
 
                             collector.on('collect', (reaction) => {
                                 const { emoji: { name: emojiName} } = reaction;

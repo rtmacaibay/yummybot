@@ -61,7 +61,7 @@ module.exports = {
                         serverQueue.songs.push(song);
                     }
                 }
-                embed.addField(`Queued`,`[${playlist.title}](${playlist.url}) (${playlist.length} videos)`);
+                embed.addField(`Queued`,`[${playlist.title}](${playlist.url}) (${videos.length} videos)`);
                 return message.channel.send(embed);
             } else {
                 const songInfo = await youtube.getVideo(args[0]);
@@ -85,7 +85,7 @@ module.exports = {
                     this.initQueue(message,song, voiceChannel, queue);
                 } else {
                     serverQueue.songs.push(song);
-                    embed.addField(`Queued`,`${song.title} has been added to the queue! (${song.duration})`);
+                    embed.addField(`Queued`,`[${song.title}](${song.url}) has been added to the queue! (${song.duration})`);
                     return message.channel.send(embed); 
                 }
             }
