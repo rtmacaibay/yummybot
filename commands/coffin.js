@@ -12,7 +12,7 @@ module.exports = {
                     setTimeout(function () {
                         msg.delete();
                         message.channel.send('https://tenor.com/view/dancing-coffin-dancing-happy-fun-celebrating-gif-16728482')
-                            .then(msg => play.execute(msg, ['https://www.youtube.com/watch?v=GhIa4gAhjWE']))
+                            .then(msg => play.execute(message, ['https://www.youtube.com/watch?v=GhIa4gAhjWE']))
                             .catch(console.error);
                     }, 5000)
                 }));
