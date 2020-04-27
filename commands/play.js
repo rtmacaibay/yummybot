@@ -30,7 +30,7 @@ module.exports = {
                                                 .catch(function () {
                                                     return message.channel.send('Playlist is either private or it does not exist!');
                                                 });
-                const videos = await playlist.getVideos()
+                const videos = await playlist.getVideos(5)
                                                 .catch(function () {
                                                     return message.channel.send('There was a problem getting one of the videos in the playlist!');
                                                 });
@@ -42,7 +42,7 @@ module.exports = {
                     }
 
                     if (!serverQueue) {
-                        this.initQueue(message, song, voiceChannel, queue);
+                        await this.initQueue(message, song, voiceChannel, queue);
                     } else {
                         serverQueue.songs.push(song);
                     }
