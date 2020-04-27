@@ -1,6 +1,7 @@
 module.exports = {
     config: {
         prefix: process.env.PREFIX,
-        token: process.env.TOKEN
+        token: process.env.TOKEN,
+        youtube: process.env.YOUTUBE
     }
 };

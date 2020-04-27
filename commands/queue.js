@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     name: 'queue',
     description: 'Gets the current queue', 
+    aliases: ['q'],
     args: false,
     execute(message, args) {
         const serverQueue = message.client.queue.get(message.guild.id);
