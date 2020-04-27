@@ -11,7 +11,7 @@ module.exports = {
             .setColor('#ffd1dc')
             .setTitle('Music Queue');
         if (!serverQueue) {
-            embed.addField('',`Nothing is playing.`);
+            embed.addField(`Nothing is playing.`,`Nothing is playing.`);
             message.delete()
                 .then(message.channel.send(embed))
         } else {
@@ -23,7 +23,8 @@ module.exports = {
             }
             let counter = 0;
             for (let i = start; i < serverQueue.songs.length; i++) {
-                embed.addField('',`${i+1}) ${serverQueue.songs[i].title}`);
+                var song = serverQueue.songs[i];
+                embed.addField(`${i+1}) ${song.title}`,`Duration: ${song.duration}`);
                 if (counter++ == 9) {
                     break;
                 }

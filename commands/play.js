@@ -37,10 +37,11 @@ module.exports = {
                                                     return message.channel.send('There was a problem getting one of the videos in the playlist!');
                                                 });
                 for (let i = 0; i < videos.length; i++) {
-                    const video = await videos[i].fetch();
+                    const songInfo = await videos[i].fetch();
                     const song = {
-                        title: video.title,
-                        url: video.url
+                        title: songInfo.title,
+                        url: songInfo.url,
+                        duration: songInfo.duration
                     }
 
                     if (!serverQueue) {
@@ -50,19 +51,20 @@ module.exports = {
                         serverQueue.songs.push(song);
                     }
                 }
-                embed.addField('',`Queued [${playlist.title}](${playlist.url}) (${playlist.length} videos)`);
+                embed.addField(`Queued`,`[${playlist.title}](${playlist.url}) (${playlist.length} videos)`);
             } else {
-                const songInfo = await ytdl.getInfo(args[0]);
+                const songInfo = await youtube.getVideo(args[0]);
                 const song = {
                     title: songInfo.title,
-                    url: songInfo.video_url
+                    url: songInfo.url,
+                    duration: songInfo.duration
                 };
 
                 if (!serverQueue) {
                     this.initQueue(message,song, voiceChannel, queue);
                 } else {
                     serverQueue.songs.push(song);
-                    embed.addField(`${song.title} has been added to the queue!`, '');
+                    embed.addField(`Queued`,`${song.title} has been added to the queue! (${song.duration})`);
                     return message.channel.send(embed); 
                 }
             }
@@ -101,6 +103,8 @@ module.exports = {
         const guild = message.guild;
         const queue = message.client.queue;
         const serverQueue = queue.get(guild.id);
+        var embed = new MessageEmbed()
+                .setColor('#ffd1dc');
 
         if (!song) {
             serverQueue.voiceChannel.leave();
@@ -116,6 +120,7 @@ module.exports = {
             })
             .on('error', error => console.error(error));
         dispatcher.setVolumeLogarithmic(serverQueue.volume / 10);
-        serverQueue.textChannel.send(`Started playing: **${song.title}**`);
+        embed.addField(`Started playing`, `**${song.title}** (${song.duration})`);
+        serverQueue.textChannel.send(embed);
     }
 };
