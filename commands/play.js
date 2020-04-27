@@ -14,6 +14,8 @@ module.exports = {
         try {
             const queue = message.client.queue;
             var serverQueue = queue.get(message.guild.id);
+            var embed = new MessageEmbed()
+                .setColor('#ffd1dc');
 
             const voiceChannel = message.member.voice.channel;
             if (!voiceChannel) {
@@ -30,7 +32,7 @@ module.exports = {
                                                 .catch(function () {
                                                     return message.channel.send('Playlist is either private or it does not exist!');
                                                 });
-                const videos = await playlist.getVideos(5)
+                const videos = await playlist.getVideos()
                                                 .catch(function () {
                                                     return message.channel.send('There was a problem getting one of the videos in the playlist!');
                                                 });
@@ -48,6 +50,7 @@ module.exports = {
                         serverQueue.songs.push(song);
                     }
                 }
+                embed.addField('',`Queued [${playlist.title}](${playlist.url}) (${playlist.length} videos)`);
             } else {
                 const songInfo = await ytdl.getInfo(args[0]);
                 const song = {
@@ -59,7 +62,8 @@ module.exports = {
                     this.initQueue(message,song, voiceChannel, queue);
                 } else {
                     serverQueue.songs.push(song);
-                    return message.channel.send(`${song.title} has been added to the queue!`); 
+                    embed.addField(`${song.title} has been added to the queue!`, '');
+                    return message.channel.send(embed); 
                 }
             }
         } catch (error) {
