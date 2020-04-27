@@ -9,7 +9,7 @@ module.exports = {
                 message.channel.send(`You didn't specific a positive numeric argument, ${message.author}!`);
                 return;
             }
-            message.channel.bulkDelete(parseInt(args[0]))
+            message.channel.bulkDelete(parseInt(args[0]) + 1)
                 .then(messages => message.channel.send(`The Yummy has taken ${messages.size} messages to the beyond.`))
                 .catch(console.error);
             setTimeout(function() {
