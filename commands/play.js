@@ -38,9 +38,14 @@ module.exports = {
                                                 });
                 for (let i = 0; i < videos.length; i++) {
                     const songInfo = await videos[i].fetch();
-                    var songLength = `${songInfo.duration.minutes}:${songInfo.duration.seconds}`;
+                    var songLength = `${songInfo.duration.minutes}:`;
                     if (songInfo.duration.hour > 0) {
                         songLength = (`${songInfo.duration.hour}:`).concat(songLength);
+                    }
+                    if (songInfo.duration.seconds < 10) {
+                        songLength = songLength.concat(`0${songInfo.duration.seconds}`);
+                    } else {
+                        songLength = songLength.concat(`${song.duration.seconds}`);
                     }
                     const song = {
                         title: songInfo.title,
@@ -57,11 +62,17 @@ module.exports = {
                     }
                 }
                 embed.addField(`Queued`,`[${playlist.title}](${playlist.url}) (${playlist.length} videos)`);
+                return message.channel.send(embed);
             } else {
                 const songInfo = await youtube.getVideo(args[0]);
-                var songLength = `${songInfo.duration.minutes}:${songInfo.duration.seconds}`;
+                var songLength = `${songInfo.duration.minutes}:`;
                 if (songInfo.duration.hour > 0) {
                     songLength = (`${songInfo.duration.hour}:`).concat(songLength);
+                }
+                if (songInfo.duration.seconds < 10) {
+                    songLength = songLength.concat(`0${songInfo.duration.seconds}`);
+                } else {
+                    songLength = songLength.concat(`${song.duration.seconds}`);
                 }
                 const song = {
                     title: songInfo.title,
