@@ -9,12 +9,12 @@ module.exports = {
         message.delete()
             .then(message.channel.send('https://tenor.com/view/coffin-dance-ricky-sunglasses-friends-squad-gif-16787280')
                 .then(msg => {
+                    play.execute(message, ['https://www.youtube.com/watch?v=GhIa4gAhjWE']);
                     setTimeout(function () {
                         msg.delete();
-                        message.channel.send('https://tenor.com/view/dancing-coffin-dancing-happy-fun-celebrating-gif-16728482')
-                            .then(msg => play.execute(message, ['https://www.youtube.com/watch?v=GhIa4gAhjWE']))
-                            .catch(console.error);
+                        message.channel.send('https://tenor.com/view/dancing-coffin-dancing-happy-fun-celebrating-gif-16728482');
                     }, 5000)
-                }));
+                }))
+            .catch(console.error);
     }
 };
