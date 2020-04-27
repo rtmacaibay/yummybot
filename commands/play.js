@@ -45,7 +45,7 @@ module.exports = {
                     if (songInfo.duration.seconds < 10) {
                         songLength = songLength.concat(`0${songInfo.duration.seconds}`);
                     } else {
-                        songLength = songLength.concat(`${song.duration.seconds}`);
+                        songLength = songLength.concat(`${songInfo.duration.seconds}`);
                     }
                     const song = {
                         title: songInfo.title,
@@ -72,7 +72,7 @@ module.exports = {
                 if (songInfo.duration.seconds < 10) {
                     songLength = songLength.concat(`0${songInfo.duration.seconds}`);
                 } else {
-                    songLength = songLength.concat(`${song.duration.seconds}`);
+                    songLength = songLength.concat(`${songInfo.duration.seconds}`);
                 }
                 const song = {
                     title: songInfo.title,
