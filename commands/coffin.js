@@ -13,7 +13,8 @@ module.exports = {
                         msg.delete();
                         message.channel.send('https://tenor.com/view/dancing-coffin-dancing-happy-fun-celebrating-gif-16728482');
                     }, 5000)
-                            .then(msg => play.execute(msg, ['https://www.youtube.com/watch?v=GhIa4gAhjWE']));
+                            .then(msg => play.execute(msg, ['https://www.youtube.com/watch?v=GhIa4gAhjWE']))
+                            .catch(console.error);
                 }));
     }
 };
