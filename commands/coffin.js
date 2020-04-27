@@ -13,7 +13,7 @@ module.exports = {
                     setTimeout(function () {
                         msg.delete();
                         message.channel.send('https://tenor.com/view/dancing-coffin-dancing-happy-fun-celebrating-gif-16728482');
-                    }, 5000)
+                    }, 32000)
                 }))
             .catch(console.error);
     }
