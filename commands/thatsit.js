@@ -24,7 +24,6 @@ module.exports = {
         }
         
         message.delete()
-            .then(message.channel.send(output))
-            .catch(console.error);
+            .then(message.channel.send(output));
     }
 };

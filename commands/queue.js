@@ -11,7 +11,9 @@ module.exports = {
             .setColor('#ffd1dc')
             .setTitle('Music Queue');
         if (!serverQueue) {
-            embed.addField(`Nothing is playing.`,'');
+            embed.addField('',`Nothing is playing.`);
+            message.delete()
+                .then(message.channel.send(embed))
         } else {
             var start;
             if (!args.length) {
@@ -21,7 +23,7 @@ module.exports = {
             }
             let counter = 0;
             for (let i = start; i < serverQueue.songs.length; i++) {
-                embed.addField(`${i+1}) ${serverQueue.songs[i].title}`, '');
+                embed.addField('',`${i+1}) ${serverQueue.songs[i].title}`);
                 if (counter++ == 9) {
                     break;
                 }
@@ -49,9 +51,7 @@ module.exports = {
                                         }
                                     }
                                 })
-                        }))
-                .catch(console.error);
-            
+                        }));
         }
 
     }
