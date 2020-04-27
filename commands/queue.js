@@ -38,20 +38,21 @@ module.exports = {
                                 return ['⬅️', '➡️'].includes(reaction.emoji.name) && !msg.author.bot;
                             };
 
-                            msg.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-                                .then(collected => {
-                                    const reaction = collected.first();
+                            const collector = msg.createReactionCollector(filter, { time: 15000 });
 
-                                    if (reaction.emoji.name === '⬅️') {
-                                        if (start >= 10) {
-                                            this.execute(msg, [start - 10]);
-                                        }
-                                    } else {
-                                        if (serverQueue.songs.length >= start + 10) {
-                                            this.execute(msg, [start + 10]);
-                                        }
+                            collector.on('collect', (reaction) => {
+                                const { emoji: { name: emojiName} } = reaction;
+                                
+                                if (emojiName === '⬅️') {
+                                    if (start >= 10) {
+                                        this.execute(msg, [start - 10]);
                                     }
-                                })
+                                } else {
+                                    if (serverQueue.songs.length >= start + 10) {
+                                        this.execute(msg, [start + 10]);
+                                    }
+                                }
+                            });
                         }));
         }
 
