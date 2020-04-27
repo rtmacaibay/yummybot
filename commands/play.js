@@ -41,7 +41,8 @@ module.exports = {
                     const song = {
                         title: songInfo.title,
                         url: songInfo.url,
-                        duration: songInfo.duration
+                        duration: songInfo.duration,
+                        author: message.author
                     }
 
                     if (!serverQueue) {
@@ -57,14 +58,15 @@ module.exports = {
                 const song = {
                     title: songInfo.title,
                     url: songInfo.url,
-                    duration: songInfo.duration
+                    duration: songInfo.duration,
+                    author: message.author
                 };
 
                 if (!serverQueue) {
                     this.initQueue(message,song, voiceChannel, queue);
                 } else {
                     serverQueue.songs.push(song);
-                    embed.addField(`Queued`,`${song.title} has been added to the queue! (${song.duration})`);
+                    embed.addField(`Queued`,`${song.title} has been added to the queue! (${song.duration.minutes}:${song.duration.seconds})`);
                     return message.channel.send(embed); 
                 }
             }
@@ -120,7 +122,7 @@ module.exports = {
             })
             .on('error', error => console.error(error));
         dispatcher.setVolumeLogarithmic(serverQueue.volume / 10);
-        embed.addField(`Started playing`, `**${song.title}** (${song.duration})`);
+        embed.addField(`Started playing`, `**${song.title}** (${song.duration.minutes}:${song.duration.seconds})`);
         serverQueue.textChannel.send(embed);
     }
 };

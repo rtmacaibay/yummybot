@@ -24,7 +24,7 @@ module.exports = {
             let counter = 0;
             for (let i = start; i < serverQueue.songs.length; i++) {
                 var song = serverQueue.songs[i];
-                embed.addField(`${i+1}) ${song.title}`,`Duration: ${song.duration}`);
+                embed.addField(`${i+1}) Requested by ${song.author.username}`,`${song.title} (${song.duration.minutes}:${song.duration.seconds})`);
                 if (counter++ == 9) {
                     break;
                 }
