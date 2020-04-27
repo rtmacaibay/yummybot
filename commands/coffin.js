@@ -1,3 +1,5 @@
+const play = require('./play');
+
 module.exports = {
     name: 'coffin',
     description: 'For when your homie is long gone',
@@ -10,7 +12,8 @@ module.exports = {
                     setTimeout(function () {
                         msg.delete();
                         message.channel.send('https://tenor.com/view/dancing-coffin-dancing-happy-fun-celebrating-gif-16728482');
-                    }, 5000);
+                    }, 5000)
+                            .then(msg => play.execute(msg, ['https://www.youtube.com/watch?v=GhIa4gAhjWE']));
                 }));
     }
 };
