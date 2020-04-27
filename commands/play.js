@@ -43,6 +43,7 @@ module.exports = {
 
                     if (!serverQueue) {
                         await this.initQueue(message, song, voiceChannel, queue);
+                        serverQueue = queue.get(message.guild.id);
                     } else {
                         serverQueue.songs.push(song);
                     }
