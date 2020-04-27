@@ -13,7 +13,7 @@ module.exports = {
         if (!serverQueue) {
             embed.addField(`Nothing is playing.`,`Nothing is playing.`);
             message.delete()
-                .then(message.channel.send(embed))
+                .then(message.channel.send(embed));
         } else {
             var start;
             if (!args.length) {
@@ -37,10 +37,11 @@ module.exports = {
                             const filter = (reaction) => {
                                 return ['⬅️', '➡️'].includes(reaction.emoji.name) && !msg.author.bot;
                             };
-
+                            console.log('Reactions made');
                             const collector = msg.createReactionCollector(filter);
 
                             collector.on('collect', (reaction) => {
+                                console.log('Reactions collected');
                                 const { emoji: { name: emojiName} } = reaction;
                                 
                                 if (emojiName === '⬅️') {

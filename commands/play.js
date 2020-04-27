@@ -141,7 +141,7 @@ module.exports = {
             })
             .on('error', error => console.error(error));
         dispatcher.setVolumeLogarithmic(serverQueue.volume / 10);
-        embed.addField(`Started playing`, `**${song.title}** (${song.duration})`);
+        embed.addField(`Started playing`, `**[${song.title}](${song.url})** (${song.duration})`);
         serverQueue.textChannel.send(embed);
     }
 };
