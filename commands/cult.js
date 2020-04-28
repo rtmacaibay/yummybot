@@ -38,7 +38,7 @@ module.exports = {
                         new_nick = new_nick.concat(('🅱').concat(words[i].slice(1)));
                     }
                 }
-                return message.member.setNickname(new_nick);
+                return member.setNickname(new_nick);
             }
         } catch (error) {
             console.log(error);
