@@ -23,7 +23,8 @@ module.exports = {
                         new_nick = new_nick.concat(('🅱').concat(words[i].slice(1)));
                     }
                 }
-                return message.member.setNickname(new_nick);
+                return message.delete()
+                        .then(message.member.setNickname(new_nick));
             } else {
                 let member = message.guild.member(args[0]);
                 member.roles.add('704560760877088818');
@@ -38,7 +39,8 @@ module.exports = {
                         new_nick = new_nick.concat(('🅱').concat(words[i].slice(1)));
                     }
                 }
-                return member.setNickname(new_nick);
+                return message.delete()
+                        .then(member.setNickname(new_nick));
             }
         } catch (error) {
             console.log(error);
