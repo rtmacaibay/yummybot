@@ -7,7 +7,7 @@ module.exports = {
         if (!message.guild.me.hasPermission('MANAGE_NICKNAMES') && !message.guild.me.hasPermission('MANAGE_ROLES'))
             return message.channel.send(`I don't have permission to convert you to the cult!`);
 
-        let role = message.guild.roles.find(r => r.name === 'The Recruits');
+        let role = message.guild.roles.fetch('704560760877088818');
 
         if (!args.length) {
             message.member.addRole(role).catch(console.error);
