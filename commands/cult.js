@@ -12,20 +12,32 @@ module.exports = {
         if (!args.length) {
             message.member.roles.add('704560760877088818').catch(console.error);
             var nickname = message.member.displayName;
-            if (this.isVowel(nickname.charAt(0))) {
-                return message.member.setNickname(('🅱').concat(nickname));
-            } else {
-                return message.member.setNickname(('🅱').concat(nickname.slice(1)));
+            var new_nick = '';
+            const words = nickname.split(' ');
+
+            for (let i = 0; i < words.length; i++) {
+                if (this.isVowel(nickname.charAt(0))) {
+                    new_nick = new_nick.concat(('🅱').concat(words[i]));
+                } else {
+                    new_nick = new_nick.concat(('🅱').concat(words[i].slice(1)));
+                }
             }
+            return message.member.setNickname(new_nick);
         } else {
-            let member = message.guild.members.fetch(args[0]);
+            let member = message.guild.member(args[0]);
             member.roles.add('704560760877088818').catch(console.error);
             var nickname = member.displayName;
-            if (this.isVowel(nickname.charAt(0))) {
-                return member.setNickname(('🅱').concat(nickname));
-            } else {
-                return member.setNickname(('🅱').concat(nickname.slice(1)));
+            var new_nick = '';
+            const words = nickname.split(' ');
+
+            for (let i = 0; i < words.length; i++) {
+                if (this.isVowel(nickname.charAt(0))) {
+                    new_nick = new_nick.concat(('🅱').concat(words[i]));
+                } else {
+                    new_nick = new_nick.concat(('🅱').concat(words[i].slice(1)));
+                }
             }
+            return message.member.setNickname(new_nick);
         }
     },
 
