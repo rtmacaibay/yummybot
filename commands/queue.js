@@ -35,7 +35,7 @@ module.exports = {
                         .then(msg => {
                             msg.react('⬅️').then(() => msg.react('➡️'));
                             const filter = (reaction) => {
-                                return ['⬅️', '➡️'].includes(reaction.emoji.name) && !msg.author.bot;
+                                return (reaction.emoji.name === '⬅' || reaction.emoji.name === '➡') && !msg.author.bot;
                             };
                             console.log('Reactions made');
                             const collector = msg.createReactionCollector(filter);
