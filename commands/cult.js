@@ -11,7 +11,7 @@ module.exports = {
 
         if (!args.length) {
             message.member.roles.add('704560760877088818').catch(console.error);
-            var nickname = message.member.displayname;
+            var nickname = message.member.displayName;
             if (this.isVowel(nickname.charAt(0))) {
                 return message.member.setNickname(('🅱').concat(nickname));
             } else {
@@ -20,7 +20,7 @@ module.exports = {
         } else {
             let member = message.guild.members.fetch(args[0]);
             member.roles.add('704560760877088818').catch(console.error);
-            var nickname = member.displayname;
+            var nickname = member.displayName;
             if (this.isVowel(nickname.charAt(0))) {
                 return member.setNickname(('🅱').concat(nickname));
             } else {
