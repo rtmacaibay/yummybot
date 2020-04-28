@@ -24,7 +24,7 @@ module.exports = {
             }
             return message.member.setNickname(new_nick);
         } else {
-            let member = message.guild.member(args[0]);
+            let member = message.guild.member(args[0]).catch(console.error);
             member.roles.add('704560760877088818').catch(console.error);
             var nickname = member.displayName;
             var new_nick = '';
