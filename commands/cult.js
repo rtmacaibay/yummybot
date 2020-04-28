@@ -7,11 +7,11 @@ module.exports = {
         if (!message.guild.me.hasPermission('MANAGE_NICKNAMES') && !message.guild.me.hasPermission('MANAGE_ROLES'))
             return message.channel.send(`I don't have permission to convert you to the cult!`);
 
-        let role = message.guild.roles.fetch('704560760877088818');
+        // let role = message.guild.roles.fetch('704560760877088818');
 
         if (!args.length) {
-            message.member.roles.add(role).catch(console.error);
-            var nickname = message.member.nickname;
+            message.member.roles.add('704560760877088818').catch(console.error);
+            var nickname = message.member.displayname;
             if (this.isVowel(nickname.charAt(0))) {
                 return message.member.setNickname(('🅱').concat(nickname));
             } else {
@@ -19,8 +19,8 @@ module.exports = {
             }
         } else {
             let member = message.guild.members.fetch(args[0]);
-            member.roles.add(role).catch(console.error);
-            var nickname = member.nickname;
+            member.roles.add('704560760877088818').catch(console.error);
+            var nickname = member.displayname;
             if (this.isVowel(nickname.charAt(0))) {
                 return member.setNickname(('🅱').concat(nickname));
             } else {
