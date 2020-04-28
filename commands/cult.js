@@ -17,7 +17,10 @@ module.exports = {
                 const words = nickname.split(' ');
 
                 for (let i = 0; i < words.length; i++) {
-                    if (this.isVowel(nickname.charAt(0))) {
+                    if (i != 0) {
+                        new_nick = new_nick.concat(' ');
+                    }
+                    if (this.isVowel(words[i].charAt(0))) {
                         new_nick = new_nick.concat(('🅱').concat(words[i]));
                     } else {
                         new_nick = new_nick.concat(('🅱').concat(words[i].slice(1)));
@@ -33,7 +36,10 @@ module.exports = {
                 const words = nickname.split(' ');
 
                 for (let i = 0; i < words.length; i++) {
-                    if (this.isVowel(nickname.charAt(0))) {
+                    if (i != 0) {
+                        new_nick = new_nick.concat(' ');
+                    }
+                    if (this.isVowel(words[i].charAt(0))) {
                         new_nick = new_nick.concat(('🅱').concat(words[i]));
                     } else {
                         new_nick = new_nick.concat(('🅱').concat(words[i].slice(1)));
