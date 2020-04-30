@@ -31,7 +31,8 @@ module.exports = {
             }
 
             message.delete()
-            .then(this.getReactions(message.channel.send(embed)));
+            .then(message.channel.send(embed)
+                .then(msg => this.getReactions(msg)));
         }
 
     },
