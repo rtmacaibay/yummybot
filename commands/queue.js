@@ -19,31 +19,30 @@ module.exports = {
 
             let index = 0;
 
-            var newMessage;
             message.channel.send(this.createQueueEmbed(serverQueue, index))
-            .then(msg => newMessage = msg);
-
-            const filter = (reaction, user) => {
-                return (reaction.emoji.name === '⬅' || reaction.emoji.name === '➡') && !user.bot;
-            };
-
-            newMessage.react('⬅️')
-            .then(() => newMessage.react('➡️'))
-            .then(() => {
-                console.log('Reactions made');
-                const collector = newMessage.createReactionCollector(filter);
-
-                collector.on('collect', (reaction) => {
-                    console.log('Reactions collected');
-                    const { emoji: { name: emojiName} } = reaction;
-                    
-                    if (emojiName === '⬅️') index -= 10
-                    else index += 10;
-
-                    if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
-                    else if (index > serverQueue.songs.length - 1) index = 0;
-
-                    newMessage.edit(this.createQueueEmbed(serverQueue, index));
+            .then((newMessage) => {
+                const filter = (reaction, user) => {
+                    return (reaction.emoji.name === '⬅' || reaction.emoji.name === '➡') && !user.bot;
+                };
+    
+                newMessage.react('⬅️')
+                .then(() => newMessage.react('➡️'))
+                .then(() => {
+                    console.log('Reactions made');
+                    const collector = newMessage.createReactionCollector(filter);
+    
+                    collector.on('collect', (reaction) => {
+                        console.log('Reactions collected');
+                        const { emoji: { name: emojiName} } = reaction;
+                        
+                        if (emojiName === '⬅️') index -= 10
+                        else index += 10;
+    
+                        if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
+                        else if (index > serverQueue.songs.length - 1) index = 0;
+    
+                        newMessage.edit(this.createQueueEmbed(serverQueue, index));
+                    });
                 });
             });
         }
