@@ -20,7 +20,7 @@ module.exports = {
             let index = 0;
 
             var newMessage;
-            message.channel.send(createQueueEmbed(serverQueue, index))
+            message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then(msg => newMessage = msg);
 
             const filter = (reaction, user) => {
