@@ -37,9 +37,9 @@ module.exports = {
 
     },
 
-    async getReactions(message) {
+    getReactions(message) {
         message.react('⬅️').then(() => message.react('➡️'))
-        .then(() => {
+        .then(async function () {
             const filter = (reaction) => {
                 return (reaction.emoji.name === '⬅' || reaction.emoji.name === '➡') && !msg.author.bot;
             };
