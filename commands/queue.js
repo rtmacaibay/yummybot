@@ -13,7 +13,7 @@ module.exports = {
         if (!serverQueue) {
             embed.addField(`Nothing is playing.`,`Nothing is playing.`);
             message.delete()
-                .then(message.channel.send(embed));
+            .then(message.channel.send(embed));
         } else {
             var start;
             if (!args.length) {
@@ -31,34 +31,34 @@ module.exports = {
             }
 
             message.delete()
-                .then(message.channel.send(embed)
-                        .then(msg => {
-                            msg.react('⬅️').then(() => msg.react('➡️'))
-                                .then(() => {
-                                    const filter = (reaction) => {
-                                        return (reaction.emoji.name === '⬅' || reaction.emoji.name === '➡') && !msg.author.bot;
-                                    };
-                                    console.log('Reactions made');
-                                    const collector = msg.createReactionCollector(filter);
-        
-                                    collector.on('collect', (reaction) => {
-                                        console.log('Reactions collected');
-                                        const { emoji: { name: emojiName} } = reaction;
-                                        
-                                        if (emojiName === '⬅️') {
-                                            if (start >= 10) {
-                                                this.execute(msg, [start - 10]);
-                                            }
-                                        } else {
-                                            if (serverQueue.songs.length >= start + 10) {
-                                                this.execute(msg, [start + 10]);
-                                            }
-                                        }
-                                    });
-                                });
-                            
-                        }));
+            .then(this.getReactions(message.channel.send(embed)));
         }
 
+    },
+
+    getReactions(message) {
+        message.react('⬅️').then(() => message.react('➡️'))
+        .then(() => {
+            const filter = (reaction) => {
+                return (reaction.emoji.name === '⬅' || reaction.emoji.name === '➡') && !msg.author.bot;
+            };
+            console.log('Reactions made');
+            const collector = message.createReactionCollector(filter);
+
+            collector.on('collect', (reaction) => {
+                console.log('Reactions collected');
+                const { emoji: { name: emojiName} } = reaction;
+                
+                if (emojiName === '⬅️') {
+                    if (start >= 10) {
+                        this.execute(message, [start - 10]);
+                    }
+                } else {
+                    if (serverQueue.songs.length >= start + 10) {
+                        this.execute(message, [start + 10]);
+                    }
+                }
+            });
+        });
     }
 };

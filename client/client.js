@@ -8,6 +8,8 @@ module.exports = class extends Client {
 
 		this.queue = new Map();
 
+		this.ratings = new Map();
+
 		this.config = config;
 	}
 };
