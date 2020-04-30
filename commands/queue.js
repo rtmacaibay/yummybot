@@ -15,51 +15,55 @@ module.exports = {
             message.delete()
             .then(message.channel.send(embed));
         } else {
-            var start;
-            if (!args.length) {
-                start = 0;
-            } else {
-                start = args[0];
-            }
-            let counter = 0;
-            for (let i = start; i < serverQueue.songs.length; i++) {
-                var song = serverQueue.songs[i];
-                embed.addField(`${i+1}) Requested by ${song.author.username}`,`[${song.title}](${song.url}) (${song.duration})`);
-                if (counter++ == 9) {
-                    break;
-                }
-            }
+            message.delete();
 
-            message.delete()
-            .then(message.channel.send(embed)
-                .then(msg => this.getReactions(msg)));
+            let index = 0;
+
+            var newMessage;
+            message.channel.send(createQueueEmbed(serverQueue, index))
+            .then(msg => newMessage = msg);
+
+            const filter = (reaction, user) => {
+                return (reaction.emoji.name === '⬅' || reaction.emoji.name === '➡') && !user.bot;
+            };
+
+            newMessage.react('⬅️')
+            .then(() => newMessage.react('➡️'))
+            .then(() => {
+                console.log('Reactions made');
+                const collector = newMessage.createReactionCollector(filter);
+
+                collector.on('collect', (reaction) => {
+                    console.log('Reactions collected');
+                    const { emoji: { name: emojiName} } = reaction;
+                    
+                    if (emojiName === '⬅️') index -= 10
+                    else index += 10;
+
+                    if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
+                    else if (index > serverQueue.songs.length - 1) index = 0;
+
+                    newMessage.edit(this.createQueueEmbed(serverQueue, index));
+                });
+            });
         }
 
     },
 
-    getReactions(message) {
-        message.react('⬅️').then(() => message.react('➡️'))
-        .then(async function () {
-            const filter = (reaction) => {
-                return (reaction.emoji.name === '⬅' || reaction.emoji.name === '➡') && !msg.author.bot;
-            };
-            console.log('Reactions made');
-            const collector = message.createReactionCollector(filter, { time: 10000 });
+    createQueueEmbed(serverQueue, start) {
+        var embed = new MessageEmbed()
+            .setColor('#ffd1dc')
+            .setTitle('Music Queue'); 
 
-            await collector.on('collect', (reaction) => {
-                console.log('Reactions collected');
-                const { emoji: { name: emojiName} } = reaction;
-                
-                if (emojiName === '⬅️') {
-                    if (start >= 10) {
-                        this.execute(message, [start - 10]);
-                    }
-                } else {
-                    if (serverQueue.songs.length >= start + 10) {
-                        this.execute(message, [start + 10]);
-                    }
-                }
-            });
-        });
+        let counter = 0;
+        for (let i = start; i < serverQueue.songs.length; i++) {
+            var song = serverQueue.songs[i];
+            embed.addField(`${i+1}) Requested by ${song.author.username}`,`[${song.title}](${song.url}) (${song.duration})`);
+            if (counter++ == 9) {
+                break;
+            }
+        }
+
+        return embed;
     }
 };
