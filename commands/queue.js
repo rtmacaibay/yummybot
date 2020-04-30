@@ -37,16 +37,16 @@ module.exports = {
 
     },
 
-    getReactions(message) {
+    async getReactions(message) {
         message.react('⬅️').then(() => message.react('➡️'))
         .then(() => {
             const filter = (reaction) => {
                 return (reaction.emoji.name === '⬅' || reaction.emoji.name === '➡') && !msg.author.bot;
             };
             console.log('Reactions made');
-            const collector = message.createReactionCollector(filter);
+            const collector = message.createReactionCollector(filter, { time: 10000 });
 
-            collector.on('collect', (reaction) => {
+            await collector.on('collect', (reaction) => {
                 console.log('Reactions collected');
                 const { emoji: { name: emojiName} } = reaction;
                 
