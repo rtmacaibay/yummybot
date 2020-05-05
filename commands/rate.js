@@ -7,11 +7,17 @@ module.exports = {
     execute(message, args) {
         var ratings = message.client.ratings;
         var rating;
-        var query = args.join(' ');
+        var query = args.join(' ').toLowerCase();
         if (ratings.has(query)) {
             rating = ratings.get(query);
         } else {
-            rating = `${Math.floor(Math.random() * 11)}/10`
+            var score = Math.floor(Math.random() * 11);
+
+            if (score == 10 && Math.floor(Math.random() * 11) == 10) {
+                score = 11;
+            }
+
+            rating = `${score}/10`;
             ratings.set(query, rating);
         }
 
