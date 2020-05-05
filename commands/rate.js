@@ -7,7 +7,8 @@ module.exports = {
     execute(message, args) {
         var ratings = message.client.ratings;
         var rating;
-        var query = args.join(' ').toLowerCase();
+        var query = args.join(' ').toLowerCase().replace(/\s/g, '');
+        var final = args.join(' ');
         if (ratings.has(query)) {
             rating = ratings.get(query);
         } else {
@@ -21,6 +22,6 @@ module.exports = {
             ratings.set(query, rating);
         }
 
-        return message.channel.send(`I rate ${query} a ${rating}`);
+        return message.channel.send(`I rate ${final} a ${rating}`);
     }
 };
