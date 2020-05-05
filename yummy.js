@@ -21,14 +21,21 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-    if ((message.content.toLowerCase().includes('fuck') || message.content.toLowerCase().includes('shit')) && !message.author.bot)
+    const msg = message.content;
+
+    var curses = 0;
+    curses += (msg.match(/fuck/g) || []).length;
+    curses += (msg.match(/shit/g) || []).length;
+    curses += (msg.match(/bitch/g) || []).length;
+    
+    if (curses >= 5 && !message.author.bot)
         message.channel.send(`${message.author}, hey relax. You just need some yummy. Do you got that yummy?`);
-    if (!message.content.startsWith(prefix) || message.author.bot) 
+    if (!msg.startsWith(prefix) || message.author.bot) 
         return;
     
     console.log(message.content);
 
-    const args = message.content.slice(prefix.length).split(/ +/);
+    const args = msg.slice(prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
 
     const command = client.commands.get(commandName)
