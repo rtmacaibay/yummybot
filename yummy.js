@@ -6,6 +6,7 @@ const { config } = require('./config.js');
 const client = new Client(config);
 client.commands = new Discord.Collection();
 
+const prefeix = client.prefix;
 const token = client.token;
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -20,18 +21,6 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-    var prefix = client.prefix.get(message.guild.id);
-
-    if (!prefix) {
-        if (process.env.message.guild.id) {
-            client.prefix.set(message.guild.id, process.env.message.guild.id);
-            prefix = process.env.message.guild.id;
-        } else {
-            client.prefix.set(message.guild.id, client.default_prefix);
-            prefix = client.default_prefix;
-        }
-    }
-
     const msg = message.content;
 
     var curses = 0;

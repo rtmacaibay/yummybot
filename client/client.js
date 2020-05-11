@@ -12,8 +12,6 @@ module.exports = class extends Client {
 
 		this.token = config.token;
 
-		this.prefix = new Map();
-
-		this.default_prefix = config.prefix;
+		this.prefix = config.prefix;
 	}
 };
