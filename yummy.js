@@ -20,6 +20,10 @@ client.once('ready', () => {
     console.log('Ready!');
 });
 
+client.user.setActivity('Yummy by Justin Bieber', { type: 'LISTENING' })
+.then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
+.catch(console.error);
+
 client.on('message', message => {
     const msg = message.content;
 
