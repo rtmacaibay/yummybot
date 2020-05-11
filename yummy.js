@@ -6,7 +6,7 @@ const { config } = require('./config.js');
 const client = new Client(config);
 client.commands = new Discord.Collection();
 
-const prefeix = client.prefix;
+const prefix = client.prefix;
 const token = client.token;
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
