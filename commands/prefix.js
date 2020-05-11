@@ -5,5 +5,6 @@ module.exports = {
     usage: '<anything>',
     execute(message, args) {
         message.client.prefix.set(message.guild.id, args[0]);
+        process.env.message.guild.id = args[0];
     }
 };

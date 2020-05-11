@@ -23,7 +23,13 @@ client.on('message', message => {
     var prefix = client.prefix.get(message.guild.id);
 
     if (!prefix) {
-        client.prefix.set(message.guild.id, client.default_prefix);
+        if (process.env.message.guild.id) {
+            client.prefix.set(message.guild.id, process.env.message.guild.id);
+            prefix = process.env.message.guild.id;
+        } else {
+            client.prefix.set(message.guild.id, client.default_prefix);
+            prefix = client.default_prefix;
+        }
     }
 
     const msg = message.content;
