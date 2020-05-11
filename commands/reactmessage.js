@@ -21,7 +21,7 @@ module.exports = {
                     map.set(c, 0);
                 }
                 const letter = c + '_' + map.get(c);
-                const emoji = message.guild.emojis.cache.find(emoji => emoji.name === letter);
+                const emoji = message.client.guilds.resolve('161941174687498240').emojis.cache.find(emoji => emoji.name === letter);
                 if (emoji)
                     lastTwo.last().react(emoji);
             }
