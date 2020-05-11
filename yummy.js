@@ -21,7 +21,9 @@ client.once('ready', () => {
     client.user.setActivity(`${prefix}help & Yummy by Justin Bieber`, {
         type: 'LISTENING',
         url: 'https://github.com/rtmacaibay/yummybot'
-    });
+    })
+    .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
+    .catch(console.error);
 });
 
 client.on('message', message => {
