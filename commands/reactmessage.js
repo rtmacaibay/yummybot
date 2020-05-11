@@ -18,13 +18,13 @@ module.exports = {
                 const letter = c + '_' + map.get(c) - 1;
                 var server;
                 switch (map.get(c)) {
-                    case 0:
+                    case 1:
                         server = '709481570230337596';
                         break;
-                    case 1:
+                    case 2:
                         server = '709511617598980227';
                         break;
-                    case 2:
+                    case 3:
                         server = '709511828530790592';
                         break;
                     default:
