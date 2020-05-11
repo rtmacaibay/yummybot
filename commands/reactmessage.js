@@ -15,7 +15,7 @@ module.exports = {
                 } else {
                     map.set(c, 0);
                 }
-                const letter = c + '_~' + map.get(c);
+                const letter = c + '_' + map.get(c);
                 var server;
                 switch (map.get(c)) {
                     case 0:
