@@ -13,10 +13,9 @@ module.exports = {
                 if (map.get(c)) {
                     map.set(c, map.get(c) + 1);
                 } else {
-                    map.set(c, 0);
+                    map.set(c, 1);
                 }
-                const letter = c + '_' + map.get(c);
-                console.log(map.get(c));
+                const letter = c + '_' + map.get(c) - 1;
                 var server;
                 switch (map.get(c)) {
                     case 0:
@@ -31,7 +30,6 @@ module.exports = {
                     default:
                         server = '709511962995851305';
                 }
-                console.log(server);
                 const emoji = message.client.guilds.resolve(server).emojis.cache.find(emoji => emoji.name === letter);
                 if (emoji)
                     lastTwo.last().react(emoji);
