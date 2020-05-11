@@ -18,6 +18,10 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
     console.log('Ready!');
+    client.user.setActivity(`${prefix}help & Yummy by Justin Bieber`, {
+        type: 'LISTENING',
+        url: 'https://github.com/rtmacaibay/yummybot'
+    });
 });
 
 client.on('message', message => {
@@ -63,7 +67,3 @@ client.on('message', message => {
 });
 
 client.login(token);
-
-client.users.resolve('701617011800932432').setActivity('Yummy by Justin Bieber', { type: 'LISTENING' })
-.then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
-.catch(console.error);
