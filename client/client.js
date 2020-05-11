@@ -1,8 +1,8 @@
-const { Client, Collection } = require('discord.js');
+const { Client, Collection, Intents } = require('discord.js');
 
 module.exports = class extends Client {
 	constructor(config) {
-		super();
+		super({ws: { intents: Intents.ALL }});
 
 		this.commands = new Collection();
 

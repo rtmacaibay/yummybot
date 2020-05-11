@@ -64,6 +64,6 @@ client.on('message', message => {
 
 client.login(token);
 
-client.user.setActivity('Yummy by Justin Bieber', { type: 'LISTENING' })
+client.users.resolve('701617011800932432').setActivity('Yummy by Justin Bieber', { type: 'LISTENING' })
 .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
 .catch(console.error);

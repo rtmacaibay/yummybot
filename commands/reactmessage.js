@@ -10,18 +10,27 @@ module.exports = {
         for (var i = 0; i < args.length; i++) {
             for (var j = 0; j < args[i].length; j++) {
                 var c = args[i].toLowerCase().charAt(j);
-                if (c >= '0' && c <= '9') {
-                    continue;
-                }
-                if (map.has(c)) {
-                    if (map.get(c) == 0) {
-                        map.set(c, 1);
-                    }
+                if (map.get(c)) {
+                    map.set(c, map.get(c) + 1);
                 } else {
                     map.set(c, 0);
                 }
-                const letter = c + '_' + map.get(c);
-                const emoji = message.client.guilds.resolve('709481570230337596').emojis.cache.find(emoji => emoji.name === letter);
+                const letter = c + '_';
+                var server;
+                switch (map.get(c)) {
+                    case 0:
+                        server = '709481570230337596';
+                        break;
+                    case 1:
+                        server = '709511617598980227';
+                        break;
+                    case 2:
+                        server = '709511828530790592';
+                        break;
+                    default:
+                        server = '709511962995851305';
+                }
+                const emoji = message.client.guilds.resolve(server).emojis.cache.find(emoji => emoji.name === letter);
                 if (emoji)
                     lastTwo.last().react(emoji);
             }
