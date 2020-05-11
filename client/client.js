@@ -10,6 +10,10 @@ module.exports = class extends Client {
 
 		this.ratings = new Map();
 
-		this.config = config;
+		this.token = config.token;
+
+		this.prefix = new Map();
+
+		this.default_prefix = config.prefix;
 	}
 };
