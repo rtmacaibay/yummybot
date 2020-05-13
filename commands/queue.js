@@ -20,35 +20,31 @@ module.exports = {
             let index = 0;
             
             message.channel.send(this.createQueueEmbed(serverQueue, index))
-            .then( newMessage => {
-                newMessage.react('⬅️').then( () => {
-                    newMessage.react('➡️').then( () => {
-                        let forward = newMesssage.createReactionCollector( (reaction, user) => 
-                            reaction.emoji.name === '➡️' && !user.bot, { time: 120000 })
-                            .catch(error => console.log(error));
-                        let back = newMessage.createReactionCollector( (reaction, user) => 
-                            reaction.emoji.name === '⬅️' && !user.bot, { time: 120000 })
-                            .catch(error => console.log(error));;
+            .then( (newMessage) => {
+                newMessage.react('⬅️').then(newMessage.react('➡️'));
+                let forward = newMesssage.createReactionCollector( (reaction, user) => 
+                    reaction.emoji.name === '➡️' && !user.bot, { time: 120000 })
+                    .catch(error => console.log(error));
+                let back = newMessage.createReactionCollector( (reaction, user) => 
+                    reaction.emoji.name === '⬅️' && !user.bot, { time: 120000 })
+                    .catch(error => console.log(error));;
 
-                        forward.on('collect', () => {
-                            index += 10;
-                            
-                            if (index > serverQueue.songs.length - 1) index = 0;
+                forward.on('collect', () => {
+                    index += 10;
+                    
+                    if (index > serverQueue.songs.length - 1) index = 0;
 
-                            newMessage.edit(this.createQueueEmbed(serverQueue, index));
-                        });
+                    newMessage.edit(this.createQueueEmbed(serverQueue, index));
+                });
 
-                        back.on('collect', () => {
-                            index -= 10;
+                back.on('collect', () => {
+                    index -= 10;
 
-                            if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
+                    if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
 
-                            newMessage.edit(this.createQueueEmbed(serverQueue, index));
-                        });
-                    });
-                }); 
+                    newMessage.edit(this.createQueueEmbed(serverQueue, index));
+                });
             });
-           
         }
     },
 
