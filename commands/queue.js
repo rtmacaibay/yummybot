@@ -19,6 +19,7 @@ module.exports = {
 
             let index = 0;
             
+            //try catch test
             try {
                 message.channel.send(this.createQueueEmbed(serverQueue, index))
                 .then( (newMessage) => {
