@@ -36,12 +36,14 @@ module.exports = {
                                                 .catch(function () {
                                                     return message.channel.send('There was a problem getting one of the videos in the playlist!');
                                                 });
+                var privateLinks = 0;
                 for (let i = 0; i < videos.length; i++) {
                     var songInfo;
                     try {
                         songInfo = await videos[i].fetch();
                     } catch (error) {
-                        console.log(error);
+                        console.log("Found a private link");
+                        privateLinks++;
                         continue;
                     }
                     var songLength = `${songInfo.duration.minutes}:`;
@@ -67,7 +69,7 @@ module.exports = {
                         serverQueue.songs.push(song);
                     }
                 }
-                embed.addField(`Queued`,`[${playlist.title}](${playlist.url}) (${videos.length} videos)`);
+                embed.addField(`Queued`,`[${playlist.title}](${playlist.url}) (${videos.length - privateLinks} videos)`);
                 return message.channel.send(embed);
             } else {
                 const songInfo = await youtube.getVideo(args[0]);
