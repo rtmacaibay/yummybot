@@ -37,10 +37,11 @@ module.exports = {
                                                     return message.channel.send('There was a problem getting one of the videos in the playlist!');
                                                 });
                 for (let i = 0; i < videos.length; i++) {
-                    if (!videos[i]) {
-                        continue;
-                    }
-                    const songInfo = await videos[i].fetch();
+                    const songInfo = await videos[i].fetch()
+                                            .catch(error => {
+                                                console.log(error);
+                                                continue;
+                                            });
                     var songLength = `${songInfo.duration.minutes}:`;
                     if (songInfo.duration.hour > 0) {
                         songLength = (`${songInfo.duration.hour}:`).concat(songLength);

@@ -2,6 +2,7 @@ module.exports = {
     name: 'clean',
     description: 'Deletes a number of messages that are no more than two weeks old', 
     args: true,
+    aliases: ['clear'],
     usage: '<positive integer>',
     execute(message, args) {
         if (parseInt(args[0])) {

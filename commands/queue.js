@@ -27,23 +27,21 @@ module.exports = {
     
                 newMessage.react('⬅️')
                 .then(() => newMessage.react('➡️'))
-                .then(() => {
-                    console.log('Reactions made');
-                    const collector = newMessage.createReactionCollector(filter);
-                    console.log('Reaction Collector made');
-                    collector.on('collect', (reaction) => {
-                        console.log('Reactions collected');
-                        const { emoji: { name: emojiName} } = reaction;
-                        
-                        if (emojiName === '⬅️') index -= 10
-                        else index += 10;
-    
-                        if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
-                        else if (index > serverQueue.songs.length - 1) index = 0;
-    
-                        newMessage.edit(this.createQueueEmbed(serverQueue, index));
-                    });
-                    console.log('Reaction collection finished');
+                .then(() => console.log('Reactions made'));
+
+                const collector = newMessage.createReactionCollector(filter);
+                console.log('Reaction Collector made');
+                return collector.on('collect', (reaction) => {
+                    console.log('Reactions collected');
+                    const { emoji: { name: emojiName} } = reaction;
+                    
+                    if (emojiName === '⬅️') index -= 10
+                    else index += 10;
+
+                    if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
+                    else if (index > serverQueue.songs.length - 1) index = 0;
+
+                    newMessage.edit(this.createQueueEmbed(serverQueue, index));
                 });
             });
         }
