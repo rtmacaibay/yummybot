@@ -19,7 +19,7 @@ module.exports = {
 
             let index = 0;
 
-            message.channel.send(this.createQueueEmbed(serverQueue, index))
+            return message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then((newMessage) => {
                 const filter = (reaction, user) => {
                     return (reaction.emoji.name === '⬅' || reaction.emoji.name === '➡') && !user.bot;
