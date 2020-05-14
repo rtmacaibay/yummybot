@@ -16,6 +16,8 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 
+const cooldowns = new Discord.Collection();
+
 client.once('ready', () => {
     console.log('Ready!');
     client.user.setActivity(`${prefix}help & Yummy by Justin Bieber`, {
@@ -39,7 +41,7 @@ client.on('message', message => {
     if (!msg.startsWith(prefix) || message.author.bot) 
         return;
     
-    console.log(message.content);
+    console.log(`[${message.author.username}]: ${message.content}`);
 
     const args = msg.slice(prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
@@ -58,6 +60,24 @@ client.on('message', message => {
         }
 
         return message.channel.send(reply);
+    }
+
+    if (!cooldowns.has(commandName)) cooldowns.set(commandName, new Discord.Collection());
+
+    const now = Date.now();
+    const timestamps = cooldowns.get(commandName);
+    const cooldownAmount = (command.cooldown || .5) * 1000;
+
+    if (timestamps.has(message.author.id)) {
+        const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+        if (now < expirationTime) {
+            const timeLeft = (expirationTime - now) / 1000;
+            return message.reply(`pleast wait ${timeLeft.toFixed(1)} more second(s) before reusing the '${commandName}' command.`);
+        }
+    } else {
+        timestamps.set(message.author.id, now);
+        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
     }
 
     try {

@@ -1,6 +1,7 @@
 module.exports = {
     name: 'reactmessage',
     description: 'Reacts to a message with a message',
+    cooldown: 5,
     aliases: ['reactm','rm'],
     args: true,
     usage: '<words>',
