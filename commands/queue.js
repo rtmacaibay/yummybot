@@ -22,7 +22,7 @@ module.exports = {
             message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then( (newMessage) => {
                 newMessage.react('⬅️').then(newMessage.react('➡️'));
-                let forward = newMesssage.createReactionCollector( (reaction, user) => 
+                let forward = newMessage.createReactionCollector( (reaction, user) => 
                     reaction.emoji.name === '➡️' && !user.bot, { time: 120000 })
                     .catch(error => console.log(error));
                 let back = newMessage.createReactionCollector( (reaction, user) => 

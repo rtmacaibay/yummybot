@@ -5,6 +5,10 @@ module.exports = {
     aliases: ['clear'],
     usage: '<positive integer>',
     execute(message, args) {
+        if (!message.member.hasPermissions('MANAGE_MESSAGES')) {
+            message.reply('Hey, you don\'t have the permissions to clean/clear messages!');
+        }
+
         if (parseInt(args[0])) {
             if (args[0] < 1) {
                 message.channel.send(`You didn't specific a positive numeric argument, ${message.author}!`);
