@@ -23,11 +23,9 @@ module.exports = {
             .then( (newMessage) => {
                 newMessage.react('⬅️').then(newMessage.react('➡️'));
                 let forward = newMessage.createReactionCollector( (reaction, user) => 
-                    reaction.emoji.name === '➡️' && !user.bot, { time: 120000 })
-                    .catch(error => console.log(error));
+                    reaction.emoji.name === '➡️' && !user.bot, { time: 120000 });
                 let back = newMessage.createReactionCollector( (reaction, user) => 
-                    reaction.emoji.name === '⬅️' && !user.bot, { time: 120000 })
-                    .catch(error => console.log(error));;
+                    reaction.emoji.name === '⬅️' && !user.bot, { time: 120000 });
 
                 forward.on('collect', () => {
                     index += 10;
