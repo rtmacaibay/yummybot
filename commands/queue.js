@@ -14,7 +14,7 @@ module.exports = {
             embed.addField(`Nothing is playing.`,`Nothing is playing.`);
             return message.channel.send(embed);
         } else {
-            this.sendEmbed(undefined, 0, message);
+            this.sendEmbed(undefined, 0, message, serverQueue);
         }
     },
 
@@ -35,9 +35,9 @@ module.exports = {
         return embed;
     },
 
-    async sendEmbed(msg, index, orig) {
-        if (msg) await msg.edit(this.createQueueEmbed(index));
-        else msg = await orig.channel.send(this.createQueueEmbed(index));
+    async sendEmbed(msg, index, orig, serverQueue) {
+        if (msg) await msg.edit(this.createQueueEmbed(serverQueue, index));
+        else msg = await orig.channel.send(this.createQueueEmbed(serverQueue, index));
 
         const forward = (reaction, user) => reaction.emoji.name === '➡️' && user.id !== '701617011800932432';
         const forward_collector = msg.createReactionCollector(forward, { max: 1 });
