@@ -16,11 +16,11 @@ module.exports = {
         } else {
             let index = 0;
             
-            return message.channel.send(this.createQueueEmbed(serverQueue, index))
+            message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then( (m) => {
-                return m.react('⬅️')
-                .then( async () => {
-                    await m.react('➡️');
+                m.react('⬅️')
+                .then( () => {
+                    m.react('➡️');
                     let r = m.createReactionCollector( (reaction, user) => 
                         (reaction.emoji.name === '➡️' || reaction.emoji.name === '⬅️') && user.id != m.author.id, { time: 120000 });
 
@@ -42,7 +42,7 @@ module.exports = {
                         }
                     });
 
-                    return r;
+                    setTimeout(function() {}, 120000);
                 });
             });
         }

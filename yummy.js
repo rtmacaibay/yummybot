@@ -81,11 +81,7 @@ client.on('message', message => {
     }
 
     try {
-        if (commandName === 'q' || commandName === 'queue') {
-            let r = command.execute(message, args);
-        } else {
-            command.execute(message, args);
-        }
+        command.execute(message, args);
     } catch (error) {
         console.error(error);
         message.reply(`We don't got the yummy for that command.`);
