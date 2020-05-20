@@ -5,7 +5,7 @@ module.exports = {
     description: 'Gets the current queue', 
     aliases: ['q'],
     args: false,
-    execute(message, args) {
+    async execute(message, args) {
         const serverQueue = message.client.queue.get(message.guild.id);
         var embed = new MessageEmbed()
             .setColor('#ffd1dc')
@@ -16,15 +16,15 @@ module.exports = {
         } else {
             let index = 0;
             
-            message.channel.send(this.createQueueEmbed(serverQueue, index))
-            .then( (m) => {
+            await message.channel.send(this.createQueueEmbed(serverQueue, index))
+            .then( async (m) => {
                 m.react('⬅️')
-                .then( () => {
+                .then( async () => {
                     m.react('➡️');
-                    let r = m.createReactionCollector( (reaction, user) => 
+                    let r = await m.createReactionCollector( (reaction, user) => 
                         (reaction.emoji.name === '➡️' || reaction.emoji.name === '⬅️') && user.id != m.author.id, { time: 120000 });
 
-                    r.on('collect', (reaction) => {
+                    r.on('collect', async (reaction) => {
                         const { emoji: {name: emojiName } } = reaction;
 
                         if (emojiName === '➡️') {
@@ -32,19 +32,19 @@ module.exports = {
                         
                             if (index > serverQueue.songs.length - 1) index = 0;
 
-                            m.edit(this.createQueueEmbed(serverQueue, index));
+                            await m.edit(this.createQueueEmbed(serverQueue, index));
                         } else {
                             index -= 10;
 
                             if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
 
-                            m.edit(this.createQueueEmbed(serverQueue, index));
+                            await m.edit(this.createQueueEmbed(serverQueue, index));
                         }
                     });
 
-                    r.on('end', (collected) => {
+                    r.on('end', async (collected) => {
                         console.log("Reaction collection ended");
-                        m.clearReactions();
+                        await m.clearReactions();
                     });
                 });
             });
