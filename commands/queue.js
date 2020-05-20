@@ -36,8 +36,8 @@ module.exports = {
     },
 
     async sendEmbed(msg, index, orig) {
-        if (msg) await msg.edit(createQueueEmbed(index));
-        else msg = await orig.channel.send(createQueueEmbed(index));
+        if (msg) await msg.edit(this.createQueueEmbed(index));
+        else msg = await orig.channel.send(this.createQueueEmbed(index));
 
         const forward = (reaction, user) => reaction.emoji.name === '➡️' && user.id !== '701617011800932432';
         const forward_collector = msg.createReactionCollector(forward, { max: 1 });
