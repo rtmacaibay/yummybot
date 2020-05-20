@@ -35,7 +35,7 @@ module.exports = {
         return embed;
     },
 
-    sendEmbed(msg, index, orig) {
+    async sendEmbed(msg, index, orig) {
         if (msg) await msg.edit(createQueueEmbed(index));
         else msg = await orig.channel.send(createQueueEmbed(index));
 
