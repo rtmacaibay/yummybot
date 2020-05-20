@@ -22,7 +22,7 @@ module.exports = {
             message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then( (m) => {
                 const newMessage = m;
-                newMessage.react('⬅️')
+                return newMessage.react('⬅️')
                 .then( () => {
                     newMessage.react('➡️');
                     let forward = newMessage.createReactionCollector( (reaction, user) => 
