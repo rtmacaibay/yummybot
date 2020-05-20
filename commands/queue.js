@@ -12,22 +12,19 @@ module.exports = {
             .setTitle('Music Queue');
         if (!serverQueue) {
             embed.addField(`Nothing is playing.`,`Nothing is playing.`);
-            message.delete()
-            .then(message.channel.send(embed));
+            return message.channel.send(embed);
         } else {
-            message.delete();
-
             let index = 0;
             
             message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then( (m) => {
                 m.react('⬅️')
-                .then( () => {
-                    m.react('➡️');
+                .then( async () => {
+                    await m.react('➡️');
                     let forward = m.createReactionCollector( (reaction, user) => 
-                        reaction.emoji.name === '➡️', { time: 120000 });
+                        reaction.emoji.name === '➡️' && user.id != m.author.id, { time: 120000 });
                     let back = m.createReactionCollector( (reaction, user) => 
-                        reaction.emoji.name === '⬅️', { time: 120000 });
+                        reaction.emoji.name === '⬅️' && user.id != m.author.id, { time: 120000 });
 
                     forward.on('collect', () => {
                         index += 10;
