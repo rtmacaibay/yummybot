@@ -5,8 +5,8 @@ module.exports = {
     aliases: ['clear'],
     usage: '<positive integer>',
     execute(message, args) {
-        if (!message.member.hasPermissions('MANAGE_MESSAGES')) {
-            message.reply('Hey, you don\'t have the permissions to clean/clear messages!');
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) {
+           return message.reply('Hey, you don\'t have the permissions to clean/clear messages!');
         }
 
         if (parseInt(args[0])) {
