@@ -19,12 +19,12 @@ module.exports = {
             message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then( (m) => {
                 m.react('⬅️')
-                .then( async () => {
+                .then( () => {
                     m.react('➡️');
                     let r = m.createReactionCollector( (reaction, user) => 
                         (reaction.emoji.name === '➡️' || reaction.emoji.name === '⬅️') && user.id != m.author.id, { time: 120000 });
 
-                    await r.on('collect', () => {
+                    r.on('collect', (reaction) => {
                         const { emoji: {name: emojiName } } = reaction;
 
                         if (emojiName === '➡️') {
@@ -40,6 +40,11 @@ module.exports = {
 
                             m.edit(this.createQueueEmbed(serverQueue, index));
                         }
+                    });
+
+                    r.on('end', (collected) => {
+                        console.log("Reaction collection ended");
+                        m.clearReactions();
                     });
                 });
             });
