@@ -22,7 +22,7 @@ module.exports = {
                 .then( async () => {
                     m.react('➡️');
                     let r = await m.createReactionCollector( (reaction, user) => 
-                        (reaction.emoji.name === '➡️' || reaction.emoji.name === '⬅️') && user.id != m.author.id, { time: 120000 });
+                        (reaction.emoji.name === '➡️' || reaction.emoji.name === '⬅️') && user.id != '701617011800932432', { time: 120000 });
 
                     r.on('collect', async (reaction) => {
                         const { emoji: {name: emojiName } } = reaction;
@@ -44,7 +44,6 @@ module.exports = {
 
                     r.on('end', async (collected) => {
                         console.log("Reaction collection ended");
-                        await m.clearReactions();
                     });
                 });
             });
