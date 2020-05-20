@@ -21,13 +21,12 @@ module.exports = {
             
             return message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then( (m) => {
-                const newMessage = m;
-                return newMessage.react('⬅️')
+                return m.react('⬅️')
                 .then( () => {
-                    newMessage.react('➡️');
-                    let forward = newMessage.createReactionCollector( (reaction, user) => 
+                    m.react('➡️');
+                    let forward = m.createReactionCollector( (reaction, user) => 
                         reaction.emoji.name === '➡️' && !user.bot, { time: 120000 });
-                    let back = newMessage.createReactionCollector( (reaction, user) => 
+                    let back = m.createReactionCollector( (reaction, user) => 
                         reaction.emoji.name === '⬅️' && !user.bot, { time: 120000 });
 
                     forward.on('collect', () => {
@@ -35,7 +34,7 @@ module.exports = {
                         
                         if (index > serverQueue.songs.length - 1) index = 0;
 
-                        newMessage.edit(this.createQueueEmbed(serverQueue, index));
+                        m.edit(this.createQueueEmbed(serverQueue, index));
                     });
 
                     back.on('collect', () => {
@@ -43,8 +42,10 @@ module.exports = {
 
                         if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
 
-                        newMessage.edit(this.createQueueEmbed(serverQueue, index));
+                        m.edit(this.createQueueEmbed(serverQueue, index));
                     });
+
+                    console.log(forward.ended + ' ' + back.ended);
                 });
             });
         }
