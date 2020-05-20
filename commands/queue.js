@@ -25,9 +25,9 @@ module.exports = {
                 .then( () => {
                     m.react('➡️');
                     let forward = m.createReactionCollector( (reaction, user) => 
-                        reaction.emoji.name === '➡️' && !user.bot, { time: 120000 });
+                        reaction.emoji.name === '➡️', { time: 120000 });
                     let back = m.createReactionCollector( (reaction, user) => 
-                        reaction.emoji.name === '⬅️' && !user.bot, { time: 120000 });
+                        reaction.emoji.name === '⬅️', { time: 120000 });
 
                     forward.on('collect', () => {
                         index += 10;
