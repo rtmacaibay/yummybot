@@ -19,7 +19,7 @@ module.exports = {
 
             let index = 0;
             
-            message.channel.send(this.createQueueEmbed(serverQueue, index))
+            return message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then( (m) => {
                 const newMessage = m;
                 return newMessage.react('⬅️')
