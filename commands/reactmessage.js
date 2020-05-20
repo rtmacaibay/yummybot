@@ -32,8 +32,13 @@ module.exports = {
                         server = '709511962995851305';
                 }
                 const emoji = message.client.guilds.resolve(server).emojis.cache.find(emoji => emoji.name === letter);
-                if (emoji)
+                if (emoji) {
+                    if (lastTwo.last().deleted) {
+                        lastTwo.first().delete();
+                        return;
+                    }
                     lastTwo.last().react(emoji);
+                }
             }
         }
         lastTwo.first().delete();

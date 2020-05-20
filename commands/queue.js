@@ -20,10 +20,11 @@ module.exports = {
             let index = 0;
             
             message.channel.send(this.createQueueEmbed(serverQueue, index))
-            .then( (newMessage) => {
+            .then( (m) => {
+                const newMessage = m;
                 newMessage.react('⬅️')
-                .then(newMessage.react('➡️')
                 .then( () => {
+                    newMessage.react('➡️');
                     let forward = newMessage.createReactionCollector( (reaction, user) => 
                         reaction.emoji.name === '➡️' && !user.bot, { time: 120000 });
                     let back = newMessage.createReactionCollector( (reaction, user) => 
@@ -44,7 +45,7 @@ module.exports = {
 
                         newMessage.edit(this.createQueueEmbed(serverQueue, index));
                     });
-                }));
+                });
             });
         }
     },
