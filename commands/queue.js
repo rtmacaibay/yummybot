@@ -44,14 +44,13 @@ module.exports = {
 
                         m.edit(this.createQueueEmbed(serverQueue, index));
                     });
-
-                    console.log(forward.ended + ' ' + back.ended);
                 });
             });
         }
     },
 
     createQueueEmbed(serverQueue, start) {
+        console.log("ive been called with index " + start);
         var embed = new MessageEmbed()
             .setColor('#ffd1dc')
             .setTitle('Music Queue'); 
