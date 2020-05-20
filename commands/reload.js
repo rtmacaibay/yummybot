@@ -4,6 +4,9 @@ module.exports = {
     args: true,
     usage: '<command to reload>',
 	execute(message, args) {
+        if (message.author.id != '125688931030138880') {
+            return message.channel.send('Only Bobert has access to this command.');
+        }
         const commandName = args[0].toLowerCase();
         const command = message.client.commands.get(commandName)
             || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));

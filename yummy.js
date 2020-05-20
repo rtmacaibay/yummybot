@@ -68,7 +68,7 @@ client.on('message', message => {
     const timestamps = cooldowns.get(commandName);
     const cooldownAmount = (command.cooldown || .5) * 1000;
 
-    if (timestamps.has(message.author.id)) {
+    if (timestamps.has(message.author.id) && !message.member.hasPermission('ADMINISTRATOR')) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
         if (now < expirationTime) {

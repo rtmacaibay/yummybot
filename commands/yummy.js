@@ -1,6 +1,7 @@
 module.exports = {
     name: 'yummy',
-    description: 'Yummy Generator', 
+    description: 'Yummy Generator',
+    cooldown: 10,
     args: false,
     execute(message, args) {
         let output = 'You got that ';

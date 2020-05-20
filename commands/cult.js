@@ -5,6 +5,9 @@ module.exports = {
     usage: '<Admin: user>',
     execute(message, args) {
         try {
+            if (message.guild.id != '161941174687498240') {
+                return message.channel.send(`The cult command only works on select servers.`);
+            }
             if (!message.guild.me.hasPermission('MANAGE_NICKNAMES') && !message.guild.me.hasPermission('MANAGE_ROLES'))
                 return message.channel.send(`I don't have permission to convert you to the cult!`);
 
