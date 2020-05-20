@@ -19,15 +19,15 @@ module.exports = {
 
             let index = 0;
             
-            return message.channel.send(this.createQueueEmbed(serverQueue, index))
+            message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then( (m) => {
-                return m.react('⬅️')
+                m.react('⬅️')
                 .then( () => {
                     m.react('➡️');
                     let forward = m.createReactionCollector( (reaction, user) => 
-                        reaction.emoji.name === '➡️', { time: 120000 });
+                        reaction.emoji.name === '➡️' && user.id != m.client.user.id, { time: 120000 });
                     let back = m.createReactionCollector( (reaction, user) => 
-                        reaction.emoji.name === '⬅️', { time: 120000 });
+                        reaction.emoji.name === '⬅️' && user.id != m.client.user.id, { time: 120000 });
 
                     forward.on('collect', () => {
                         index += 10;
@@ -35,6 +35,8 @@ module.exports = {
                         if (index > serverQueue.songs.length - 1) index = 0;
 
                         m.edit(this.createQueueEmbed(serverQueue, index));
+
+                        forward.empty();
                     });
 
                     back.on('collect', () => {
@@ -43,6 +45,8 @@ module.exports = {
                         if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
 
                         m.edit(this.createQueueEmbed(serverQueue, index));
+
+                        back.empty();
                     });
                 });
             });
@@ -50,7 +54,6 @@ module.exports = {
     },
 
     createQueueEmbed(serverQueue, start) {
-        console.log("ive been called with index " + start);
         var embed = new MessageEmbed()
             .setColor('#ffd1dc')
             .setTitle('Music Queue'); 
