@@ -19,7 +19,7 @@ module.exports = {
             message.channel.send(this.createQueueEmbed(serverQueue, index))
             .then( (m) => {
                 m.react('⬅️')
-                .then( () => {
+                .then( async () => {
                     m.react('➡️');
                     let r = m.createReactionCollector( (reaction, user) => 
                         (reaction.emoji.name === '➡️' || reaction.emoji.name === '⬅️') && user.id != m.author.id, { time: 120000 });
