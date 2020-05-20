@@ -14,7 +14,7 @@ module.exports = {
             embed.addField(`Nothing is playing.`,`Nothing is playing.`);
             return message.channel.send(embed);
         } else {
-            this.sendEmbed(undefined, 0, message, serverQueue);
+            await this.sendEmbed(undefined, 0, message, serverQueue);
         }
     },
 
@@ -40,7 +40,7 @@ module.exports = {
         else msg = await orig.channel.send(this.createQueueEmbed(serverQueue, index));
 
         const forward = (reaction, user) => reaction.emoji.name === '➡️' && user.id !== '701617011800932432';
-        const forward_collector = msg.createReactionCollector(forward, { max: 1 });
+        const forward_collector = msg.createReactionCollector(forward, { time: 120000 });
 
         forward_collector.on('collect', async () => {
             let new_index = index + 10;
@@ -53,7 +53,7 @@ module.exports = {
         });
 
         const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id !== '701617011800932432';
-        const back_collector = msg.createReactionCollector(back, { max: 1 });
+        const back_collector = msg.createReactionCollector(back, { time: 120000 });
 
         back_collector.on('collect', async () => {
             let new_index = index - 10;
@@ -67,5 +67,14 @@ module.exports = {
 
         await msg.react('⬅️');
         await msg.react('➡️');
+
+        let counter = 0;
+
+        while (!back_collector.ended && !forward_collector.ended) {
+            counter++;
+            if (counter % 10 == 0) {
+                console.log("Still collecting reactions");
+            }
+        }
     }
 };
