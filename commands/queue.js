@@ -67,14 +67,5 @@ module.exports = {
 
         await msg.react('⬅️');
         await msg.react('➡️');
-
-        let counter = 0;
-
-        while (!back_collector.ended && !forward_collector.ended) {
-            counter++;
-            if (counter % 10 == 0) {
-                console.log("Still collecting reactions");
-            }
-        }
     }
 };
