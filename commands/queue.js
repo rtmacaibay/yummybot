@@ -14,39 +14,7 @@ module.exports = {
             embed.addField(`Nothing is playing.`,`Nothing is playing.`);
             return message.channel.send(embed);
         } else {
-            let index = 0;
-            
-            await message.channel.send(this.createQueueEmbed(serverQueue, index))
-            .then( async (m) => {
-                m.react('⬅️')
-                .then( async () => {
-                    m.react('➡️');
-                    let r = await m.createReactionCollector( (reaction, user) => 
-                        (reaction.emoji.name === '➡️' || reaction.emoji.name === '⬅️') && user.id != '701617011800932432', { time: 120000 });
-
-                    r.on('collect', async (reaction) => {
-                        const { emoji: {name: emojiName } } = reaction;
-
-                        if (emojiName === '➡️') {
-                            index += 10;
-                        
-                            if (index > serverQueue.songs.length - 1) index = 0;
-
-                            await m.edit(this.createQueueEmbed(serverQueue, index));
-                        } else {
-                            index -= 10;
-
-                            if (index < 0) index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
-
-                            await m.edit(this.createQueueEmbed(serverQueue, index));
-                        }
-                    });
-
-                    r.on('end', async (collected) => {
-                        console.log("Reaction collection ended");
-                    });
-                });
-            });
+            this.sendEmbed(undefined, 0, message);
         }
     },
 
@@ -65,5 +33,39 @@ module.exports = {
         }
 
         return embed;
+    },
+
+    sendEmbed(msg, index, orig) {
+        if (msg) await msg.edit(createQueueEmbed(index));
+        else msg = await orig.channel.send(createQueueEmbed(index));
+
+        const forward = (reaction, user) => reaction.emoji.name === '➡️' && user.id !== '701617011800932432';
+        const forward_collector = msg.createReactionCollector(forward, { max: 1 });
+
+        forward_collector.on('collect', async () => {
+            let new_index = index + 10;
+            if (new_index > serverQueue.songs.length - 1) new_index = 0;
+
+            back_collector.stop();
+            await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+
+            this.sendEmbed(msg, new_index, orig);
+        });
+
+        const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id !== '701617011800932432';
+        const back_collector = msg.createReactionCollector(back, { max: 1 });
+
+        back_collector.on('collect', async () => {
+            let new_index = index - 10;
+            if (new_index < 0) new_index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
+
+            forward_collector.stop();
+            await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+
+            this.sendEmbed(msg, new_index, orig);
+        });
+
+        await msg.react('⬅️');
+        await msg.react('➡️');
     }
 };
