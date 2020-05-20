@@ -24,7 +24,7 @@ module.exports = {
                     let r = m.createReactionCollector( (reaction, user) => 
                         (reaction.emoji.name === '➡️' || reaction.emoji.name === '⬅️') && user.id != m.author.id, { time: 120000 });
 
-                    r.on('collect', () => {
+                    await r.on('collect', () => {
                         const { emoji: {name: emojiName } } = reaction;
 
                         if (emojiName === '➡️') {
@@ -41,8 +41,6 @@ module.exports = {
                             m.edit(this.createQueueEmbed(serverQueue, index));
                         }
                     });
-
-                    setTimeout(function() {}, 120000);
                 });
             });
         }
