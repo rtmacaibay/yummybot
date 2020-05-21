@@ -85,7 +85,7 @@ module.exports = {
         const filter = (reaction, user) => (reaction.emoji.name === '➡️' || reaction.emoji.name === '⬅️') && user.id !== '701617011800932432';
 
         await msg.awaitReactions(filter, { max: 1, time: 120000 })
-        .then(collected => {
+        .then(async (collected) => {
             const reaction = collected.first();
             let new_index = index;
 
