@@ -57,7 +57,7 @@ module.exports = {
 
         back_collector.on('collect', async () => {
             let new_index = index - 10;
-            if (new_index < 0) new_index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
+            if (new_index < 0) new_index = (serverQueue.songs.length > 9 && (new_index + 10) == 0 ? serverQueue.songs.length - 10 : 0);
 
             forward_collector.stop();
             await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
