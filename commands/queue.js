@@ -40,7 +40,7 @@ module.exports = {
         else msg = await orig.channel.send(this.createQueueEmbed(serverQueue, index));
 
         const forward = (reaction, user) => reaction.emoji.name === '➡️' && user.id !== '701617011800932432';
-        const forward_collector = msg.createReactionCollector(forward, { time: 120000 });
+        const forward_collector = msg.createReactionCollector(forward, { max: 1, time: 120000 });
 
         forward_collector.on('collect', async () => {
             let new_index = index + 10;
@@ -52,14 +52,8 @@ module.exports = {
             this.sendEmbed(msg, new_index, orig, serverQueue);
         });
 
-        forward_collector.on('end', (collected, reason) => {
-            console.log('forward collector ended on ' + reason);
-            console.log('forward collector:');
-            console.log(collected);
-        });
-
         const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id !== '701617011800932432';
-        const back_collector = msg.createReactionCollector(back, { time: 120000 });
+        const back_collector = msg.createReactionCollector(back, { max: 1, time: 120000 });
 
         back_collector.on('collect', async () => {
             let new_index = index - 10;
@@ -69,12 +63,6 @@ module.exports = {
             await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
 
             this.sendEmbed(msg, new_index, orig, serverQueue);
-        });
-
-        back_collector.on('end', (collected, reason) => {
-            console.log('back collector ended on ' + reason);
-            console.log('back collector:');
-            console.log(collected);
         });
 
         await msg.react('⬅️');
