@@ -2,7 +2,7 @@ const { Client, Collection, Intents } = require('discord.js');
 
 module.exports = class extends Client {
 	constructor(config) {
-		super({ws: { intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES'] }});
+		super({ws: { intents: Intents.NON_PRIVILEGED }});
 
 		this.commands = new Collection();
 
