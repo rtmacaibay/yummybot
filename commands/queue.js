@@ -59,7 +59,7 @@ module.exports = {
             console.log(collected);
         });
 
-        const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id === '701617011800932432';
+        const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id !== '701617011800932432';
         const back_collector = msg.createReactionCollector(back, { time: 120000 });
 
         back_collector.on('collect', async () => {
