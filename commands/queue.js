@@ -39,7 +39,7 @@ module.exports = {
         if (msg) await msg.edit(this.createQueueEmbed(serverQueue, index));
         else msg = await orig.channel.send(this.createQueueEmbed(serverQueue, index));
 
-        const forward = (reaction, user) => reaction.emoji.name === '➡️';
+        const forward = (reaction, user) => reaction.emoji.name === '➡️' && user.id !== '701617011800932432';
         const forward_collector = msg.createReactionCollector(forward, { time: 120000 });
 
         forward_collector.on('collect', async () => {
@@ -59,7 +59,7 @@ module.exports = {
             console.log(collected);
         });
 
-        const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id === orig.author.id;
+        const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id === '701617011800932432';
         const back_collector = msg.createReactionCollector(back, { time: 120000 });
 
         back_collector.on('collect', async () => {
@@ -81,8 +81,5 @@ module.exports = {
 
         await msg.react('⬅️');
         await msg.react('➡️');
-        console.log('forward: ' + forward_collector.ended);
-        console.log('back: ' + back_collector.ended);
-        console.log('forward: ' + forward_collector.ended);
     }
 };
