@@ -39,47 +39,67 @@ module.exports = {
         if (msg) await msg.edit(this.createQueueEmbed(serverQueue, index));
         else msg = await orig.channel.send(this.createQueueEmbed(serverQueue, index));
 
-        const forward = (reaction, user) => reaction.emoji.name === '➡️' && user.id !== '701617011800932432';
-        const forward_collector = msg.createReactionCollector(forward, { time: 120000 });
+        // const forward = (reaction, user) => reaction.emoji.name === '➡️' && user.id !== '701617011800932432';
+        // const forward_collector = msg.createReactionCollector(forward, { time: 120000 });
 
-        forward_collector.on('collect', async () => {
-            console.log('collected something');
-            let new_index = index + 10;
-            if (new_index > serverQueue.songs.length - 1) new_index = 0;
+        // forward_collector.on('collect', async () => {
+        //     console.log('collected something');
+        //     let new_index = index + 10;
+        //     if (new_index > serverQueue.songs.length - 1) new_index = 0;
 
-            back_collector.stop();
-            await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+        //     back_collector.stop();
+        //     await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
 
-            this.sendEmbed(msg, new_index, orig, serverQueue);
-        });
+        //     this.sendEmbed(msg, new_index, orig, serverQueue);
+        // });
 
-        forward_collector.on('end', (collected, reason) => {
-            console.log('forward collector ended on ' + reason);
-            console.log('forward collector:');
-            console.log(collected);
-        });
+        // forward_collector.on('end', (collected, reason) => {
+        //     console.log('forward collector ended on ' + reason);
+        //     console.log('forward collector:');
+        //     console.log(collected);
+        // });
 
-        const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id !== '701617011800932432';
-        const back_collector = msg.createReactionCollector(back, { time: 120000 });
+        // const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id !== '701617011800932432';
+        // const back_collector = msg.createReactionCollector(back, { time: 120000 });
 
-        back_collector.on('collect', async () => {
-            console.log('collected something');
-            let new_index = index - 10;
-            if (new_index < 0) new_index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
+        // back_collector.on('collect', async () => {
+        //     console.log('collected something');
+        //     let new_index = index - 10;
+        //     if (new_index < 0) new_index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
 
-            forward_collector.stop();
-            await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+        //     forward_collector.stop();
+        //     await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
 
-            this.sendEmbed(msg, new_index, orig, serverQueue);
-        });
+        //     this.sendEmbed(msg, new_index, orig, serverQueue);
+        // });
 
-        back_collector.on('end', (collected, reason) => {
-            console.log('back collector ended on ' + reason);
-            console.log('back collector:');
-            console.log(collected);
-        });
+        // back_collector.on('end', (collected, reason) => {
+        //     console.log('back collector ended on ' + reason);
+        //     console.log('back collector:');
+        //     console.log(collected);
+        // });
 
         await msg.react('⬅️');
         await msg.react('➡️');
+
+        const filter = (reaction, user) => (reaction.emoji.name === '➡️' || reaction.emoji.name === '⬅️') && user.id !== '701617011800932432';
+
+        await msg.awaitReactions(filter, { max: 1, time: 120000 })
+        .then(collected => {
+            const reaction = collected.first();
+            let new_index = index;
+
+            if (reaction.emoji.name === '➡️') {
+                new_index += 10;
+                if (new_index > serverQueue.songs.length - 1) new_index = 0;
+            } else {
+                new_index -= 10;
+                if (new_index < 0) new_index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
+            }
+            
+            await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+            thgis.sendEmbed(msg, new_index, orig, serverQueue);
+        });
+
     }
 };
