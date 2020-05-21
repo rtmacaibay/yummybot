@@ -88,4 +88,8 @@ client.on('message', message => {
     }
 });
 
+client.on('messageReactionAdd', (reaction, user) => {
+    console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
+});
+
 client.login(token);
