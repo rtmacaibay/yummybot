@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const ytdl = require('ytdl-core');
 const Youtube = require('simple-youtube-api');
-const { config } = require('../config.js');
+const { config } = require('../../config.js');
 const youtube = new Youtube(config.youtube);
 
 module.exports = {
