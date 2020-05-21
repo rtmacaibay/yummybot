@@ -50,7 +50,13 @@ module.exports = {
             back_collector.stop();
             await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
 
-            this.sendEmbed(msg, new_index, orig);
+            this.sendEmbed(msg, new_index, orig, serverQueue);
+        });
+
+        forward_collector.on('end', (collected, reason) => {
+            console.log('forward collector ended on ' + reason);
+            console.log('forward collector:');
+            console.log(collected);
         });
 
         const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id === orig.author.id;
@@ -64,10 +70,19 @@ module.exports = {
             forward_collector.stop();
             await msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
 
-            this.sendEmbed(msg, new_index, orig);
+            this.sendEmbed(msg, new_index, orig, serverQueue);
+        });
+
+        back_collector.on('end', (collected, reason) => {
+            console.log('back collector ended on ' + reason);
+            console.log('back collector:');
+            console.log(collected);
         });
 
         await msg.react('⬅️');
         await msg.react('➡️');
+        console.log('forward: ' + forward_collector.ended);
+        console.log('back: ' + back_collector.ended);
+        console.log('forward: ' + forward_collector.ended);
     }
 };
