@@ -14,7 +14,7 @@ module.exports = {
             embed.addField(`Nothing is playing.`,`Nothing is playing.`);
             return message.channel.send(embed);
         } else {
-            await this.sendEmbed(undefined, 0, message, serverQueue);
+            this.sendEmbed(undefined, 0, message, serverQueue);
         }
     },
 
