@@ -39,10 +39,11 @@ module.exports = {
         if (msg) await msg.edit(this.createQueueEmbed(serverQueue, index));
         else msg = await orig.channel.send(this.createQueueEmbed(serverQueue, index));
 
-        const forward = (reaction, user) => reaction.emoji.name === '➡️' && user.id === orig.author.id;
+        const forward = (reaction, user) => reaction.emoji.name === '➡️';
         const forward_collector = msg.createReactionCollector(forward, { time: 120000 });
 
         forward_collector.on('collect', async () => {
+            console.log('collected something');
             let new_index = index + 10;
             if (new_index > serverQueue.songs.length - 1) new_index = 0;
 
@@ -56,6 +57,7 @@ module.exports = {
         const back_collector = msg.createReactionCollector(back, { time: 120000 });
 
         back_collector.on('collect', async () => {
+            console.log('collected something');
             let new_index = index - 10;
             if (new_index < 0) new_index = (serverQueue.songs.length > 9 ? serverQueue.songs.length - 10 : 0);
 
