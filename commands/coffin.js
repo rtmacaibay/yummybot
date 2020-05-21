@@ -1,4 +1,4 @@
-const play = require('./play');
+const play = require('./music/play');
 
 module.exports = {
     name: 'coffin',

@@ -9,10 +9,24 @@ client.commands = new Discord.Collection();
 const prefix = client.prefix;
 const token = client.token;
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const mainCommands = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
+for (const file of mainCommands) {
     const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+}
+
+const musicCommands = fs.readdirSync('./commands/music').filter(file => file.endsWith('.js'));
+
+for (const file of musicCommands) {
+    const command = require(`./commands/music/${file}`);
+    client.commands.set(command.name, command);
+}
+
+const acnhCommands = fs.readdirSync('./commands/acnh').filter(file => file.endsWith('.js'));
+
+for (const file of acnhCommands) {
+    const command = require(`./commands/acnh/${file}`);
     client.commands.set(command.name, command);
 }
 
