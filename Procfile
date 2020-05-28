@@ -1,2 +1,2 @@
 worker: node yummy.js
-web: web/index.html
+web: chmod a+x web/index.html
