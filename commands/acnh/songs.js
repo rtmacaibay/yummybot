@@ -29,7 +29,7 @@ module.exports = {
         
         var embed = new MessageEmbed()
             .setColor('#ffd1dc')
-            .setFooter(`Yoojung Bot walked so ${message.guild.me.nickname} can run.`, 'https://i.imgur.com/ZUQSyDN.png');
+            .setFooter(`Yoojung Bot walked so ${message.guild.me.nickname} could run.`, 'https://i.imgur.com/ZUQSyDN.png');
 
         if (body.hits.hits.length == 0) {
             embed.setTitle('Not Found!');
