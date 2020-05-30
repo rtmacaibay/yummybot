@@ -6,7 +6,7 @@ const client = new Client({ node: config.bonsai, log: 'trace' });
 
 module.exports = {
     name: 'fossils',
-    description: 'Search up for fossils in Animal Crossing New Horizons',
+    description: 'Search up fossils in Animal Crossing New Horizons',
     aliases: ['fossil', 'fos'], 
     args: true,
     usage: '<fossil name [Animal Crossing]>',

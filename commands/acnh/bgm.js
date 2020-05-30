@@ -6,7 +6,7 @@ const client = new Client({ node: config.bonsai, log: 'trace' });
 
 module.exports = {
     name: 'backgroundmusic',
-    description: 'Search up for songs in Animal Crossing New Horizons',
+    description: 'Search up background music in Animal Crossing New Horizons',
     aliases: ['bgm'], 
     args: true,
     usage: '<bgm name [Animal Crossing]>',
