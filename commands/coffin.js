@@ -3,7 +3,7 @@ const play = require('./music/play');
 module.exports = {
     name: 'coffin',
     description: 'For when your homie is long gone',
-    aliases: ['f', 'rip'], 
+    aliases: ['rip'], 
     args: false,
     execute(message, args) {
         message.delete()

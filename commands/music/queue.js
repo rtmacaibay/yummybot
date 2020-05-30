@@ -39,7 +39,7 @@ module.exports = {
         if (msg) await msg.edit(this.createQueueEmbed(serverQueue, index));
         else msg = await orig.channel.send(this.createQueueEmbed(serverQueue, index));
 
-        const forward = (reaction, user) => reaction.emoji.name === '➡️' && user.id !== '701617011800932432';
+        const forward = (reaction, user) => reaction.emoji.name === '➡️' && !user.bot;
         const forward_collector = msg.createReactionCollector(forward, { max: 1, time: 120000 });
 
         forward_collector.on('collect', async () => {
@@ -52,7 +52,7 @@ module.exports = {
             this.sendEmbed(msg, new_index, orig, serverQueue);
         });
 
-        const back = (reaction, user) => reaction.emoji.name === '⬅️' && user.id !== '701617011800932432';
+        const back = (reaction, user) => reaction.emoji.name === '⬅️' && !user.bot;
         const back_collector = msg.createReactionCollector(back, { max: 1, time: 120000 });
 
         back_collector.on('collect', async () => {

@@ -5,9 +5,9 @@ const { Client } = require('@elastic/elasticsearch');
 const client = new Client({ node: config.bonsai, log: 'trace' });
 
 module.exports = {
-    name: 'bugs',
+    name: 'fish',
     description: 'Search up for bugs in Animal Crossing New Horizons',
-    aliases: ['b'], 
+    aliases: ['f'], 
     args: false,
     async execute(message, args) {
         const query = args.join(' ');
@@ -30,9 +30,9 @@ module.exports = {
             .setColor('#ffd1dc')
             .setFooter(`Yoojung Bot walked so ${message.guild.me.nickname} can run.`, 'https://i.imgur.com/ZUQSyDN.png');
 
-        if (body.hits.hits.length == 0 || !body.hits.hits[0]['_source']['image_uri'].includes('bugs')) {
+        if (body.hits.hits.length == 0 || !body.hits.hits[0]['_source']['image_uri'].includes('fish')) {
             embed.setTitle('Not Found!');
-            embed.setDescription(`We didn't find ${query} in the bug database!`);
+            embed.setDescription(`We didn't find ${query} in the fish database!`);
             embed.setImage('https://i.imgur.com/DMervdl.jpg');
         } else {
             const found = body.hits.hits[0]['_source'];
@@ -52,8 +52,9 @@ module.exports = {
                 { name: 'Time', value: time, inline: true },
                 { name: 'Rarity', value: avail['rarity'], inline: true },
                 { name: 'Location', value: avail['location'], inline: true },
+                { name: 'Shadow', value: found['shadow'], inline: true},
                 { name: 'Price', value: found['price'], inline: true },
-                { name: 'Flick\'s Price', value: found['price-flick'], inline: true },
+                { name: 'CJ\'s Price', value: found['price-cj'], inline: true },
                 { name: '\u200B', value: `*${found['catch-phrase']}*` }
             );
             //embed.setImage(found['image_uri']);
