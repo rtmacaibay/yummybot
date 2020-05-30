@@ -5,28 +5,28 @@ const { Client } = require('@elastic/elasticsearch');
 const client = new Client({ node: config.bonsai, log: 'trace' });
 
 module.exports = {
-    name: 'villagers',
-    description: 'Search up for villagers in Animal Crossing New Horizons',
-    aliases: ['v'], 
+    name: 'backgroundmusic',
+    description: 'Search up for songs in Animal Crossing New Horizons',
+    aliases: ['bgm'], 
     args: true,
-    usage: '<villager name/personality/birthday/species/gender [Animal Crossing]>',
+    usage: '<bgm name [Animal Crossing]>',
     async execute(message, args) {
         const query = args.join(' ');
 
         const { body } = await client.search({
-            index: 'villagers',
-            size: 100,
+            index: 'bgm',
+            size: 30,
             body: {
                 query: {
                     multi_match: {
                         query: query,
                         fuzziness: '1',
-                        fields: ['name.name-USen', 'personality', 'birthday', 'species', 'gender']
+                        fields: ['file-name', 'weather']
                     }
                 }
             }
         });
-
+        
         const list = body.hits.hits;
 
         if (list.length == 0) {
@@ -34,7 +34,7 @@ module.exports = {
                 .setColor('#ffd1dc')
                 .setFooter(`Yoojung Bot walked so ${message.guild.me.nickname} can run.`, 'https://i.imgur.com/ZUQSyDN.png')
                 .setTitle('Not Found!')
-                .setDescription(`We didn't find ${query} in the villager database!`)
+                .setDescription(`We didn't find ${query} in the background music database!`)
                 .setImage('https://i.imgur.com/DMervdl.jpg');
             message.channel.send(embed);
         } else {
@@ -54,16 +54,12 @@ module.exports = {
         
         const found = list[index]['_source'];
 
-        embed.setTitle(found['name']['name-USen']);
-        embed.setDescription(`*"${found['catch-phrase']}"*`);
+        embed.setTitle(found['file-name']);
         embed.addFields(
-            { name: 'Personality', value: found['personality'], inline: true },
-            { name: 'Species', value: found['species'], inline: true },
-            { name: 'Gender', value: found['gender'], inline: true },
-            { name: 'Birthday', value: found['birthday-string'] }
+            { name: 'Hour', value: found['hour'], inline: true },
+            { name: 'Weather', value: found['weather'], inline: true }
         );
-        embed.setImage(found['image_uri']);
-        embed.setThumbnail(found['icon_uri']);
+        embed.setURL(`http://acnhapi.com/v1/hourly/${found['id']}`);
 
         return embed;
     },

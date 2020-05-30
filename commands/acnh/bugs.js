@@ -8,7 +8,8 @@ module.exports = {
     name: 'bugs',
     description: 'Search up for bugs in Animal Crossing New Horizons',
     aliases: ['b'], 
-    args: false,
+    args: true,
+    usage: '<bug name [Animal Crossing]>',
     async execute(message, args) {
         const query = args.join(' ');
 

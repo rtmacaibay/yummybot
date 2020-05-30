@@ -6,9 +6,10 @@ const client = new Client({ node: config.bonsai, log: 'trace' });
 
 module.exports = {
     name: 'fish',
-    description: 'Search up for bugs in Animal Crossing New Horizons',
+    description: 'Search up for fish in Animal Crossing New Horizons',
     aliases: ['f'], 
     args: false,
+    usage: '<fish name [Animal Crossing]>',
     async execute(message, args) {
         const query = args.join(' ');
 
