@@ -32,7 +32,7 @@ module.exports = {
         if (list.length == 0) {
             var embed = new MessageEmbed()
                 .setColor('#ffd1dc')
-                .setFooter(`Yoojung Bot walked so ${message.guild.me.nickname} can run.`, 'https://i.imgur.com/ZUQSyDN.png')
+                .setFooter(`Yoojung Bot walked so ${message.guild.me.nickname} could run.`, 'https://i.imgur.com/ZUQSyDN.png')
                 .setTitle('Not Found!')
                 .setDescription(`We didn't find ${query} in the background music database!`)
                 .setImage('https://i.imgur.com/DMervdl.jpg');

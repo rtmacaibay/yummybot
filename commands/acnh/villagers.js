@@ -13,26 +13,44 @@ module.exports = {
     async execute(message, args) {
         const query = args.join(' ');
 
-        const { body } = await client.search({
-            index: 'villagers',
-            size: 100,
-            body: {
-                query: {
-                    multi_match: {
-                        query: query,
-                        fuzziness: '1',
-                        fields: ['name.name-USen', 'personality', 'birthday', 'species', 'gender']
+        var response;
+
+        if (this.isDate(query)) {
+            response = await client.search({
+                index: 'villagers',
+                size: 1,
+                body: {
+                    query: {
+                        match: {
+                            'birthday': {
+                                query: query
+                            }
+                        }
                     }
                 }
-            }
-        });
+            });
+        } else {
+            response = await client.search({
+                index: 'villagers',
+                size: 100,
+                body: {
+                    query: {
+                        multi_match: {
+                            query: query,
+                            fuzziness: '1',
+                            fields: ['name.name-USen', 'personality', 'species', 'gender']
+                        }
+                    }
+                }
+            });
+        }
 
-        const list = body.hits.hits;
+        const list = response.body.hits.hits;
 
         if (list.length == 0) {
             var embed = new MessageEmbed()
                 .setColor('#ffd1dc')
-                .setFooter(`Yoojung Bot walked so ${message.guild.me.nickname} can run.`, 'https://i.imgur.com/ZUQSyDN.png')
+                .setFooter(`Yoojung Bot walked so ${message.guild.me.nickname} could run.`, 'https://i.imgur.com/ZUQSyDN.png')
                 .setTitle('Not Found!')
                 .setDescription(`We didn't find ${query} in the villager database!`)
                 .setImage('https://i.imgur.com/DMervdl.jpg');
@@ -100,5 +118,13 @@ module.exports = {
 
         await msg.react('⬅️');
         await msg.react('➡️');
+    },
+
+    isDate(str) {
+        var isValid = false;
+        var mmdd = str.match(/^(\d{2})\/(\d{2})$/);
+        var mdd = str.match(/^(\d{1})\/(\d{2})$/);
+
+        return mmdd != null || mdd != null;
     }
 };
