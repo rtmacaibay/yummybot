@@ -123,8 +123,10 @@ module.exports = {
     isDate(str) {
         var isValid = false;
         var mmdd = str.match(/^(\d{2})\/(\d{2})$/);
+        var mmd = str.match(/^(\d{2})\/(\d{1})$/);
         var mdd = str.match(/^(\d{1})\/(\d{2})$/);
+        var md = str.match(/^(\d{1})\/(\d{1})$/);
 
-        return mmdd != null || mdd != null;
+        return mmdd != null || mdd != null || mmd != null || md != null;
     }
 };
