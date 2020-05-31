@@ -37,7 +37,7 @@ module.exports = {
                         multi_match: {
                             query: query,
                             fuzziness: '1',
-                            fields: ['name.name-USen', 'personality', 'species', 'gender']
+                            fields: ['name.name-USen', 'personality', 'birthday-string', 'species', 'gender']
                         }
                     }
                 }
