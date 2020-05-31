@@ -16,15 +16,14 @@ module.exports = {
         var response;
 
         if (this.isDate(query)) {
+            const birthday = this.getBirthday(query);
             response = await client.search({
                 index: 'villagers',
                 size: 1,
                 body: {
                     query: {
                         match: {
-                            'birthday': {
-                                query: query
-                            }
+                            'birthday-string': birthday
                         }
                     }
                 }
@@ -68,7 +67,7 @@ module.exports = {
     createEmbed(list, index, orig) {
         var embed = new MessageEmbed()
             .setColor('#ffd1dc')
-            .setFooter(`Yoojung Bot walked so ${orig.guild.me.nickname} can run.`, 'https://i.imgur.com/ZUQSyDN.png');
+            .setFooter(`Yoojung Bot walked so ${orig.guild.me.nickname} could run.`, 'https://i.imgur.com/ZUQSyDN.png');
         
         const found = list[index]['_source'];
 
@@ -128,5 +127,67 @@ module.exports = {
         var md = str.match(/^(\d{1})\/(\d{1})$/);
 
         return mmdd != null || mdd != null || mmd != null || md != null;
+    },
+
+    getBirthday(str) {
+        const date = str.split('/');
+        var output = '';
+
+        switch (parseInt(date[0])) {
+            case 1:
+                output = output.concat('January ');
+                break;
+            case 2:
+                output = output.concat('February ');
+                break;
+            case 3:
+                output = output.concat('March ');
+                break;
+            case 4:
+                output = output.concat('April ');
+                break;
+            case 5:
+                output = output.concat('May ');
+                break;
+            case 6:
+                output = output.concat('June ');
+                break;
+            case 7:
+                output = output.concat('July ');
+                break;
+            case 8:
+                output = output.concat('August ');
+                break;
+            case 9:
+                output = output.concat('September ');
+                break;
+            case 10:
+                output = output.concat('October ');
+                break;
+            case 11:
+                output = output.concat('November ');
+                break;
+            case 12:
+                output = output.concat('December ');
+                break;
+            default: 
+                output = output.concat('invalid');
+        }
+
+        switch (parseInt(date[1]) % 10) {
+            case 1:
+                output = output.concat(`${date[1]}st`);
+                break;
+            case 2:
+                output = output.concat(`${date[1]}nd`);
+                break;
+            case 3:
+                output = output.concat(`${date[1]}rd`);
+                break;
+            default:
+                output = output.concat(`${date[1]}th`);
+        }
+
+        return output;
     }
 };
