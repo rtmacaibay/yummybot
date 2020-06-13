@@ -20,7 +20,7 @@ By default, the bot uses '!' as the command prefix. To get a list of all command
 Here is a picture depicting ACNH API integration. Below is an example checking out the "Jock" villagers in Animal Crossing New Horizons. <br/><br/>
 
 <p align="center">
-  <img src="https://puu.sh/FVQHk/00b8bba93b.png" alt="ACNH Testing" width="738">
+  <img src="https://puu.sh/FVQHk/00b8bba93b.png" alt="ACNH Testing" width="300">
 </p>
 
 ## Special Thanks
