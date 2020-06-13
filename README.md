@@ -9,8 +9,12 @@ Yummy Bot is a Discord bot utilizing JavaScript, Discord.js, YouTube API, ACNH A
 * Many meme and inside joke commands
 * Based on Justin Bieber's "Yummy"
 
-## Docs
-[View The Docs Here...Soon](https://github.com/rtmacaibay/yummybot)
+## Usage
+By default, the bot uses '!' as the command prefix. To get a list of all commands, '!help' will provide all the commands.<br/><br/>
+
+<p align="center">
+  <img src="https://puu.sh/FVQCq/53baf608da.gif" alt="Yummy Bot Testing" width="738">
+</p>
 
 ## Special Thanks
 Special thanks to the following:
