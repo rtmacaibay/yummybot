@@ -16,7 +16,7 @@ By default, the bot uses '!' as the command prefix. To get a list of all command
   <img src="https://puu.sh/FVQCq/53baf608da.gif" alt="Yummy Bot Testing" width="738">
 </p>
 
-## ACNH Example
+## ACNH
 Here is a picture depicting ACNH API integration. Below is an example checking out the "Jock" villagers in Animal Crossing New Horizons. <br/><br/>
 
 <p align="center">
