@@ -8,9 +8,10 @@ module.exports = {
     async execute(message, args) {
         let lastTwo = await message.channel.messages.fetch({limit: 2});
         let map = new Map();
+        let counter = 0;
         try {
-            for (var i = 0; i < args.length; i++) {
-                for (var j = 0; j < args[i].length; j++) {
+            for (let i = 0; i < args.length; i++) {
+                for (let j = 0; j < args[i].length && counter <= 20; j++) {
                     var c = args[i].toLowerCase().charAt(j);
                     if (map.get(c)) {
                         map.set(c, map.get(c) + 1);
@@ -34,6 +35,7 @@ module.exports = {
                     }
                     const emoji = message.client.guilds.resolve(server).emojis.cache.find(emoji => emoji.name === letter);
                     if (emoji) {
+                        counter++;
                         if (lastTwo.last().deleted) {
                             lastTwo.first().delete();
                             return;
