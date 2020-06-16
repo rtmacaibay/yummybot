@@ -7,6 +7,7 @@ module.exports = {
     execute(message, args) {
         var cancel = args.join(' ');
 
-        return message.channel.send(`${cancel} is officially cancelled. #${cancel}isoverparty`);
+        message.delete()
+            .then(message.channel.send(`${cancel} is officially cancelled. #${cancel}isoverparty`));
     }
 };
