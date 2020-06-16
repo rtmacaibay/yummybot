@@ -3,13 +3,14 @@ module.exports = {
     description: 'Another classic Pooncity copypasta', 
     args: false,
     async execute(message, args) {
+        let num = args.length > 0 && parseInt(args[0]) > 0 ? args[0] : 5;
         if (message.guild.id === '161941174687498240') {
             let role = await message.guild.roles.fetch('715779742908809226');
             message.delete()
-            .then(message.channel.send(`${role} Recruitment event tonight: 5 mans, if you perform and impress you WILL be invited to our team`));
+            .then(message.channel.send(`${role} Recruitment event tonight: ${num} mans, if you perform and impress you WILL be invited to our team`));
         } else {
             message.delete()
-            .then(message.channel.send('Recruitment event tonight: 5 mans, if you perform and impress you WILL be invited to our team'));
+            .then(message.channel.send(`Recruitment event tonight: ${num} mans, if you perform and impress you WILL be invited to our team`));
         }
     }
 };
