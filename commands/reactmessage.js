@@ -8,7 +8,7 @@ module.exports = {
     async execute(message, args) {
         let lastTwo = await message.channel.messages.fetch({limit: 2});
         let map = new Map();
-        var counter = 0;
+        let counter = 0;
         try {
             for (let i = 0; i < args.length; i++) {
                 for (let j = 0; j < args[i].length && counter < 20; j++) {
