@@ -8,7 +8,7 @@ module.exports = {
     async execute(message, args) {
         let lastTwo = await message.channel.messages.fetch({limit: 2});
         let map = new Map();
-        let counter = 0;
+        var counter = 0;
         try {
             for (let i = 0; i < args.length; i++) {
                 for (let j = 0; j < args[i].length && counter <= 20; j++) {
@@ -35,7 +35,7 @@ module.exports = {
                     }
                     const emoji = message.client.guilds.resolve(server).emojis.cache.find(emoji => emoji.name === letter);
                     if (emoji) {
-                        counter++;
+                        counter += 1;
                         if (lastTwo.last().deleted) {
                             lastTwo.first().delete();
                             return;
