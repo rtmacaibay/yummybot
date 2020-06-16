@@ -11,7 +11,7 @@ module.exports = {
         var counter = 0;
         try {
             for (let i = 0; i < args.length; i++) {
-                for (let j = 0; j < args[i].length && counter <= 20; j++) {
+                for (let j = 0; j < args[i].length && counter < 20; j++) {
                     var c = args[i].toLowerCase().charAt(j);
                     if (map.get(c)) {
                         map.set(c, map.get(c) + 1);
