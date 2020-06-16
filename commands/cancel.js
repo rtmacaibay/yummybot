@@ -8,7 +8,7 @@ module.exports = {
     usage: '<anything>',
     execute(message, args) {
         let cancel = args.join(' ');
-        let over = args.join('');
+        let over = args.join('').toLowerCase();
         let grammar = plural.isPlural(args[0]) || plural.isPlural(args[args.length-1]) ? 'are' : 'is';
 
         message.delete()
