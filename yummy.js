@@ -30,6 +30,13 @@ for (const file of acnhCommands) {
     client.commands.set(command.name, command);
 }
 
+const memeCommands = fs.readdirSync('./commands/meme').filter(file => file.endsWith('.js'));
+
+for (const file of memeCommands) {
+    const command = require(`./commands/meme/${file}`);
+    client.commands.set(command.name, command);
+}
+
 const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
