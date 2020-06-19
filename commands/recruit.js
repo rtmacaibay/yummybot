@@ -2,6 +2,7 @@ module.exports = {
     name: 'recruit',
     description: 'Another classic Pooncity copypasta', 
     args: false,
+    usage: '<optional: any number of people youre looking to recruit',
     async execute(message, args) {
         let num = args.length > 0 && parseInt(args[0]) > 0 ? args[0] : 5;
         if (message.guild.id === '161941174687498240') {
