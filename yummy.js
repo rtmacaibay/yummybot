@@ -59,7 +59,7 @@ client.on('message', message => {
     
     if (curses >= 5 && !message.author.bot)
         message.channel.send(`${message.author}, hey relax. You just need some yummy. Do you got that yummy?`);
-    if ((msg.toLowerCase().includes('bobert') || msg.toLowerCase().includes('robert')) && msg.toLowerCase().includes('simp')) {
+    if (((msg.toLowerCase().includes('bobert') || msg.toLowerCase().includes('robert')) && msg.toLowerCase().includes('simp')) && !message.author.bot) {
         let name = msg.toLowerCase().includes('bobert') ? 'Bobert' : 'Robert';
         message.channel.send(`Thing about ${name} is he doesn't simp. In fact, he never simps.`);
         return;
