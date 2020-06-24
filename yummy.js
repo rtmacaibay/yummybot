@@ -59,6 +59,11 @@ client.on('message', message => {
     
     if (curses >= 5 && !message.author.bot)
         message.channel.send(`${message.author}, hey relax. You just need some yummy. Do you got that yummy?`);
+    if ((msg.toLowerCase().contains('bobert') || msg.toLowerCase().contains('robert')) && msg.toLowerCase().contains('simp')) {
+        let name = msg.toLowerCase().contains('bobert') ? 'Bobert' : 'Robert';
+        msg.channel.send(`Thing about ${name} is he doesn't simp. In fact, he never simps.`);
+        return;
+    }
     if (!msg.startsWith(prefix) || message.author.bot) 
         return;
     
