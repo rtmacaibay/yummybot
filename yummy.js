@@ -59,8 +59,8 @@ client.on('message', message => {
     
     if (curses >= 5 && !message.author.bot)
         message.channel.send(`${message.author}, hey relax. You just need some yummy. Do you got that yummy?`);
-    if ((msg.toLowerCase().contains('bobert') || msg.toLowerCase().contains('robert')) && msg.toLowerCase().contains('simp')) {
-        let name = msg.toLowerCase().contains('bobert') ? 'Bobert' : 'Robert';
+    if ((msg.toLowerCase().includes('bobert') || msg.toLowerCase().includes('robert')) && msg.toLowerCase().includes('simp')) {
+        let name = msg.toLowerCase().includes('bobert') ? 'Bobert' : 'Robert';
         message.channel.send(`Thing about ${name} is he doesn't simp. In fact, he never simps.`);
         return;
     }
