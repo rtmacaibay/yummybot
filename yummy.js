@@ -16,12 +16,12 @@ for (const file of mainCommands) {
     client.commands.set(command.name, command);
 }
 
-const musicCommands = fs.readdirSync('./commands/music').filter(file => file.endsWith('.js'));
+// const musicCommands = fs.readdirSync('./commands/music').filter(file => file.endsWith('.js'));
 
-for (const file of musicCommands) {
-    const command = require(`./commands/music/${file}`);
-    client.commands.set(command.name, command);
-}
+// for (const file of musicCommands) {
+//     const command = require(`./commands/music/${file}`);
+//     client.commands.set(command.name, command);
+// }
 
 const acnhCommands = fs.readdirSync('./commands/acnh').filter(file => file.endsWith('.js'));
 
