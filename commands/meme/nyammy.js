@@ -1,6 +1,6 @@
 module.exports = {
     name: 'nyammy',
-    description: 'Another classic Pooncity copypasta', 
+    description: 'A twist on a classic JB line', 
     args: false,
     execute(message, args) {
         var output = "";
