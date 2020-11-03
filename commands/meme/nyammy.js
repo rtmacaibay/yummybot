@@ -6,13 +6,13 @@ module.exports = {
         var output = "";
 
         if (!args.length) {
-            output = output.concat('ⓝya babe!');
+            output = output.concat('ⓝⓨⓐ ⓑⓐbⓔ!');
         } else if (args[0] > 165) {
             message.channel.send(`${message.author}, you can only nyammy up to 165 times.`);
             return;
         } else {
             for (var i = 0; i < args[0]; i++) {
-                output = output.concat ('ⓝya babe! ');
+                output = output.concat ('ⓝⓨⓐ ⓑⓐbⓔ! ');
             }
         }
         
