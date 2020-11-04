@@ -3,7 +3,7 @@ module.exports = {
     description: 'For all your degenerate needs', 
     args: false,
     execute(message, args) {
-        var output = `${message.author} is meowing~~ Please meow~~~ or nya~~~ back! (^ ◕ᴥ◕ ^)`;
+        var output = `${message.author} is meowing~ Please meow~ or nya~~ back! (^ ◕ᴥ◕ ^)`;
         
         message.delete()
             .then(message.channel.send(output));
