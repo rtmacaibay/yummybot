@@ -5,7 +5,6 @@ module.exports = {
     execute(message, args) {
         var output = `${message.author} is meowing~ Please meow~ or nya~~ back! (^ ◕ᴥ◕ ^)`;
         
-        message.delete()
-            .then(message.channel.send(output));
+        setTimeout(() => {  message.delete().then(message.channel.send(output)); }, 500);
     }
 };

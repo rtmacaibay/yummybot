@@ -23,7 +23,6 @@ module.exports = {
             output = (`${user}, `).concat(output);
         }
         
-        message.delete()
-            .then(message.channel.send(output));
+        setTimeout(() => {  message.delete().then(message.channel.send(output)); }, 500);
     }
 };

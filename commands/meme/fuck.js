@@ -3,8 +3,6 @@ module.exports = {
     description: 'Another classic Pooncity copypasta', 
     args: false,
     execute(message, args) {
-        message.delete()
-            .then(message.channel.send(`That's it. ${message.author} is fucking.`))
-            .catch(console.error);
+        setTimeout(() => {  message.delete().then(`That's it. ${message.author} is fucking.`); }, 500);
     }
 };

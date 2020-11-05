@@ -16,6 +16,7 @@ module.exports = {
                 output = output.concat ('yummy ');
             }
         }
-        message.channel.send(output);
+        
+        setTimeout(() => {  message.delete().then(message.channel.send(output)); }, 500);
     }
 };

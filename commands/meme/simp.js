@@ -4,15 +4,16 @@ module.exports = {
     args: false,
     usage: '<optional: specify something to simp for>',
     async execute(message, args) {
+        let output = ``;
         if (!args.length) {
             let lastTwo = await message.channel.messages.fetch({limit: 2});
-            lastTwo.first().delete();
             let user = lastTwo.last().author;
-            message.channel.send(`ATTN: ${message.author} is simping for ${user}!`);
+            output = `ATTN: ${message.author} is simping for ${user}!`;
         } else {
             let target = args.join(' ');
-            message.delete()
-            .then(message.channel.send(`ATTN: ${message.author} is simping for ${target}!`));
+            output = `ATTN: ${message.author} is simping for ${target}!`;
         }
+
+        setTimeout(() => {  message.delete().then(message.channel.send(output)); }, 500);
     }
 };

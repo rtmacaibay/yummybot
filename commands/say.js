@@ -5,7 +5,6 @@ module.exports = {
     usage: '<phrase to say>',
 	execute(message, args) {
         let msg = args.join(' ');
-        message.channel.send(msg);
-        message.delete();
+        setTimeout(() => {  message.delete().then(message.channel.send(msg)); }, 500);
 	}
 };

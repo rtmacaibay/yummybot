@@ -8,7 +8,6 @@ module.exports = {
         output = output.concat("This is nonsense, you can't even use words anymore. ");
         output = output.concat("Go the hell outside for once damn. Goddamn, get a job or something.");
         
-        message.delete()
-            .then(message.channel.send(output));
+        setTimeout(() => {  message.delete().then(message.channel.send(output)); }, 500);
     }
 };

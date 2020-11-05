@@ -17,8 +17,7 @@ module.exports = {
         } else {
             cancels.set(cancel, 1);
         }
-
-        message.delete()
-            .then(message.channel.send(`${cancel} ${grammar} officially cancelled. #${over}${grammar}overparty`));
+        
+        setTimeout(() => {  message.delete().then(message.channel.send(`${cancel} ${grammar} officially cancelled. #${over}${grammar}overparty`)); }, 500);
     }
 };
