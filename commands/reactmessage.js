@@ -37,14 +37,14 @@ module.exports = {
                     if (emoji) {
                         counter += 1;
                         if (lastTwo.last().deleted) {
-                            lastTwo.first().delete();
+                            setTimeout(() => {  lastTwo.first().delete(); }, 500);
                             return;
                         }
                         lastTwo.last().react(emoji);
                     }
                 }
             }
-            lastTwo.first().delete();
+            setTimeout(() => {  lastTwo.first().delete(); }, 500);
         } catch (e) {
             console.log(e);
         }

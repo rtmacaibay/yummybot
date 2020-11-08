@@ -8,6 +8,6 @@ module.exports = {
         if (!emoji) throw 'Undefined Emoji';
         let lastTwo = await message.channel.messages.fetch({limit: 2});
         lastTwo.last().react(emoji);
-        lastTwo.first().delete();
+        setTimeout(() => {  lastTwo.first().delete(); }, 500);
     }
 };

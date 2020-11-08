@@ -7,11 +7,11 @@ module.exports = {
         let num = args.length > 0 && parseInt(args[0]) > 0 ? args[0] : 5;
         if (message.guild.id === '161941174687498240') {
             let role = await message.guild.roles.fetch('715779742908809226');
-            message.delete()
-            .then(message.channel.send(`${role} Recruitment event tonight: ${num} mans, if you perform and impress you WILL be invited to our team`));
+            setTimeout(() => {  message.delete()
+                .then(message.channel.send(`${role} Recruitment event tonight: ${num} mans, if you perform and impress you WILL be invited to our team`)); }, 500);
         } else {
-            message.delete()
-            .then(message.channel.send(`Recruitment event tonight: ${num} mans, if you perform and impress you WILL be invited to our team`));
+            setTimeout(() => { message.delete()
+                .then(message.channel.send(`Recruitment event tonight: ${num} mans, if you perform and impress you WILL be invited to our team`)); }, 500);
         }
     }
 };
