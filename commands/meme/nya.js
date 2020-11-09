@@ -1,9 +1,9 @@
 module.exports = {
     name: 'nya',
-    description: 'Another classic Pooncity copypasta', 
+    description: 'For all your degenerate needs', 
     args: false,
     execute(message, args) {
-        var output = "Attention: for the month of November (~Nyavember~) we are now NORMALIZING meowing. This is NOT a joke. Anyone refusing to meow will be sent to the ~nya~ dimension. Welcome to the meow zone~~ :3";
+        var output = `Nya~! ${message.author} just nya'd! Please meow~ or nya~~ back! (^ ◕ᴥ◕ ^)`;
         
         setTimeout(() => {  message.delete().then(message.channel.send(output)); }, 500);
     }
