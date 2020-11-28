@@ -8,10 +8,10 @@ module.exports = {
     async execute(message, args) {
         let lastTwo = await message.channel.messages.fetch({limit: 2});
         let allReactionsMap = message.client.reactions;
-        let mapExists = allReactionsMap.has(lastTwo.first());
+        let mapExists = allReactionsMap.has(lastTwo.last());
         let map = null;
         if (mapExists) {
-            map = allReactionsMap.get(lastTwo.first());
+            map = allReactionsMap.get(lastTwo.last());
         } else {
             map = new Map();
         }
@@ -53,7 +53,7 @@ module.exports = {
             }
             setTimeout(() => {  
                 lastTwo.first().delete();
-                allReactionsMap.set(lastTwo.first(), map);
+                allReactionsMap.set(lastTwo.last(), map);
                 }, 500);
         } catch (e) {
             console.log(e);
