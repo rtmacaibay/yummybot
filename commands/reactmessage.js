@@ -7,7 +7,14 @@ module.exports = {
     usage: '<words>',
     async execute(message, args) {
         let lastTwo = await message.channel.messages.fetch({limit: 2});
-        let map = new Map();
+        let allReactionsMap = message.client.reactions;
+        let mapExists = allReactionsMap.has(lastTwo.first());
+        let map = null;
+        if (mapExists) {
+            map = allReactionsMap.get(lastTwo.first());
+        } else {
+            map = new Map();
+        }
         let counter = 0;
         try {
             for (let i = 0; i < args.length; i++) {
@@ -44,7 +51,10 @@ module.exports = {
                     }
                 }
             }
-            setTimeout(() => {  lastTwo.first().delete(); }, 500);
+            setTimeout(() => {  
+                lastTwo.first().delete();
+                allReactionsMap.set(lastTwo.first(), map);
+                }, 500);
         } catch (e) {
             console.log(e);
         }

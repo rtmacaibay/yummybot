@@ -12,6 +12,8 @@ module.exports = class extends Client {
 
 		this.cancels = new Map();
 
+		this.reactions = new Map();
+
 		this.token = config.token;
 
 		this.prefix = config.prefix;
