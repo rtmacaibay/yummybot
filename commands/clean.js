@@ -15,11 +15,14 @@ module.exports = {
                 return;
             }
             message.channel.bulkDelete(parseInt(args[0]) + 1)
-                .then(messages => message.channel.send(`The Yummy has taken ${messages.size - 1} messages to the beyond.`))
+                .then(messages => 
+                    message.channel.send(`The Yummy has taken ${messages.size - 1} messages to the beyond.`)
+                        .then(msg => setTimeout(function() {
+                            msg.delete();
+                        }, 3000))
+                    )
                 .catch(console.error);
-            setTimeout(function() {
-                message.channel.lastMessage.delete();
-            }, 3000);
+            
         } else {
             message.channel.send(`You didn't specific a positive numeric argument, ${message.author}!`);
         }
