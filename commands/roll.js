@@ -3,12 +3,8 @@ module.exports = {
     description: 'To roll a dice', 
     args: false,
     execute(message, args) {
-        let number = 3;
+        let number = Math.floor((Math.random() * 6) + 1);
 
-        if (args.length != 0) {
-            number = parseInt(args[0]);
-        }
-        
         message.delete().then(
             message.channel.send('Rolling...').then(
                 msg => {
