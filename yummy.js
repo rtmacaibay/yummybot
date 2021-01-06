@@ -23,12 +23,13 @@ for (const file of mainCommands) {
 //     client.commands.set(command.name, command);
 // }
 
-const acnhCommands = fs.readdirSync('./commands/acnh').filter(file => file.endsWith('.js'));
+/** Animal Crossing Cluster got deprovisioned. Commands are deprecated for now. */
+// const acnhCommands = fs.readdirSync('./commands/acnh').filter(file => file.endsWith('.js'));
 
-for (const file of acnhCommands) {
-    const command = require(`./commands/acnh/${file}`);
-    client.commands.set(command.name, command);
-}
+// for (const file of acnhCommands) {
+//     const command = require(`./commands/acnh/${file}`);
+//     client.commands.set(command.name, command);
+// }
 
 const memeCommands = fs.readdirSync('./commands/meme').filter(file => file.endsWith('.js'));
 
